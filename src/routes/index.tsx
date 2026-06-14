@@ -208,10 +208,10 @@ function Hero() {
   const active = luxuryFleet[index];
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden">
+    <section className="relative min-h-[75vh] max-h-[850px] w-full overflow-hidden">
       {/* Sliding image track — real horizontal motion */}
       <div
-        className="absolute inset-0 flex transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
+        className="absolute inset-0 flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
         style={{ width: `${total * 100}%`, transform: `translateX(-${index * (100 / total)}%)` }}
       >
         {luxuryFleet.map((v, i) => (
@@ -227,11 +227,11 @@ function Hero() {
           </div>
         ))}
       </div>
-      {/* Lighter overlays so the real van photos stay visible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent pointer-events-none" />
+      {/* Light overlays so real van photos stay clearly visible */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-background/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-32 sm:pt-44 pb-28">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-28 sm:pt-36 pb-20">
         <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-end">
           {/* Left: copy */}
           <div className="text-white">
