@@ -136,6 +136,9 @@ function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 -mt-6 sm:-mt-8">
+        <SearchBar />
+      </div>
       <Categories />
       <FeaturedVans />
       <HowItWorks />
@@ -311,9 +314,6 @@ function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto -mt-2 max-w-7xl px-4 pb-10 sm:px-6 sm:pb-14 lg:-mt-6">
-        <SearchBar />
-      </div>
     </section>
   );
 }
@@ -328,7 +328,7 @@ function MicroSpec({ icon, children }: { icon: React.ReactNode; children: React.
 
 function SearchBar() {
   return (
-    <div className="relative mt-12 sm:mt-16 animate-fade-up">
+    <div className="relative animate-fade-up">
       <div className="glass rounded-3xl p-2 sm:p-3 shadow-elevated max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1.2fr_1.4fr_1fr_auto] gap-1">
           <Field icon={<MapPin className="h-4 w-4" />} label="Pickup" placeholder="City or country" />
@@ -341,7 +341,7 @@ function SearchBar() {
           </button>
         </div>
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-white/80">
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/70">
         <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Free cancellation</span>
         <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 average rating</span>
         <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 7 countries · 120+ cities</span>
