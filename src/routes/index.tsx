@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   MapPin,
@@ -98,12 +98,12 @@ export const Route = createFileRoute("/")({
 });
 
 const categories = [
-  { name: "Camper Vans", count: "1,240+", img: catVan },
-  { name: "RVs & Motorhomes", count: "860+", img: catRv },
-  { name: "Luxury Campers", count: "210+", img: catLuxury },
-  { name: "Family Vans", count: "540+", img: catFamily },
-  { name: "Off-Road Adventure", count: "320+", img: catOffroad },
-  { name: "Budget Campers", count: "780+", img: catBudget },
+  { name: "Camper Vans", count: "1,240+", img: catVan, slug: "camper-vans" },
+  { name: "RVs & Motorhomes", count: "860+", img: catRv, slug: "rvs-motorhomes" },
+  { name: "Luxury Campers", count: "210+", img: catLuxury, slug: "luxury-campers" },
+  { name: "Family Vans", count: "540+", img: catFamily, slug: "family-vans" },
+  { name: "Off-Road Adventure", count: "320+", img: catOffroad, slug: "off-road-adventure" },
+  { name: "Budget Campers", count: "780+", img: catBudget, slug: "budget-campers" },
 ];
 
 const vans = [
@@ -381,17 +381,20 @@ function Categories() {
         />
         <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {categories.map((c) => (
-            <a key={c.name} href="#rent" className="group relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden rounded-3xl shadow-soft hover:shadow-elevated transition">
+            <Link key={c.name} to="/category/$slug" params={{ slug: c.slug }} className="group relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden rounded-3xl shadow-soft hover:shadow-elevated transition">
               <img src={c.img} alt={c.name} width={1024} height={768} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5 text-white">
                 <h3 className="font-display font-bold text-xl sm:text-2xl">{c.name}</h3>
                 <p className="text-sm text-white/80 mt-1">{c.count} vehicles</p>
+                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:gap-2 transition-all">
+                  View more <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </div>
               <div className="absolute top-4 right-4 grid h-9 w-9 place-items-center rounded-full glass-dark text-white opacity-0 group-hover:opacity-100 transition">
                 <ArrowRight className="h-4 w-4" />
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
