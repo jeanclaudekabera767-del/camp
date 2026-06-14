@@ -192,7 +192,7 @@ function Hero() {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % total), 5500);
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), 4200);
     return () => clearInterval(id);
   }, [paused, total]);
 
@@ -200,29 +200,21 @@ function Hero() {
   const active = luxuryFleet[index];
 
   return (
-    <section
-      className="relative min-h-[100svh] w-full overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/* Sliding image stack */}
-      <div className="absolute inset-0">
+    <section className="relative min-h-[100svh] w-full overflow-hidden">
+      {/* Sliding image track — real horizontal motion */}
+      <div
+        className="absolute inset-0 flex transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
+        style={{ width: `${total * 100}%`, transform: `translateX(-${index * (100 / total)}%)` }}
+      >
         {luxuryFleet.map((v, i) => (
-          <div
-            key={v.name}
-            className="absolute inset-0 transition-all duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
-            style={{
-              opacity: i === index ? 1 : 0,
-              transform: `scale(${i === index ? 1.04 : 1.12}) translateX(${(i - index) * 6}%)`,
-            }}
-          >
+          <div key={v.name} className="relative h-full shrink-0" style={{ width: `${100 / total}%` }}>
             <img
               src={v.img}
               alt={v.name}
               width={1920}
               height={1080}
               loading={i === 0 ? "eager" : "lazy"}
-              className="h-full w-full object-cover animate-kenburns"
+              className={`h-full w-full object-cover ${i === index ? "animate-kenburns" : ""}`}
             />
           </div>
         ))}
