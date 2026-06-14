@@ -249,7 +249,12 @@ function Hero() {
           </div>
 
           {/* Right: luxury price card */}
-          <div key={`card-${index}`} className="relative animate-fade-up">
+          <div
+            key={`card-${index}`}
+            className="relative animate-fade-up"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
             <div className="glass-dark rounded-3xl p-5 sm:p-6 text-white shadow-elevated border border-white/15">
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[var(--sunset)]/90 text-white">
