@@ -28,13 +28,21 @@ import catLuxury from "@/assets/cat-luxury.jpg";
 import catFamily from "@/assets/cat-family.jpg";
 import catOffroad from "@/assets/cat-offroad.jpg";
 import catBudget from "@/assets/cat-budget.jpg";
-import van1 from "@/assets/van-1.jpg";
-import van2 from "@/assets/van-2.jpg";
-import van3 from "@/assets/van-3.jpg";
-import lux1 from "@/assets/luxury-1.jpg";
-import lux2 from "@/assets/luxury-2.jpg";
-import lux3 from "@/assets/luxury-3.jpg";
-import lux4 from "@/assets/luxury-4.jpg";
+import real10 from "@/assets/van-real-10.jpg.asset.json";
+import real11 from "@/assets/van-real-11.jpg.asset.json";
+import real12 from "@/assets/van-real-12.jpg.asset.json";
+import real13 from "@/assets/van-real-13.jpg.asset.json";
+import real14 from "@/assets/van-real-14.jpg.asset.json";
+import real15 from "@/assets/van-real-15.jpg.asset.json";
+import real16 from "@/assets/van-real-16.jpg.asset.json";
+
+const lux1 = real12.url;
+const lux2 = real16.url;
+const lux3 = real15.url;
+const lux4 = real13.url;
+const van1 = real11.url;
+const van2 = real10.url;
+const van3 = real14.url;
 
 const luxuryFleet = [
   {
@@ -219,9 +227,9 @@ function Hero() {
           </div>
         ))}
       </div>
-      <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />
+      {/* Lighter overlays so the real van photos stay visible */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-32 sm:pt-44 pb-28">
         <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-end">
