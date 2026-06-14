@@ -200,7 +200,7 @@ function Hero() {
   const active = luxuryFleet[index];
 
   return (
-    <section className="relative isolate min-h-[62vh] sm:min-h-[68vh] max-h-[760px] w-full overflow-hidden">
+    <section className="relative isolate min-h-[56vh] sm:min-h-[60vh] max-h-[680px] w-full overflow-hidden">
       <div
         className="absolute inset-0 flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
         style={{ width: `${total * 100}%`, transform: `translateX(-${index * (100 / total)}%)` }}
@@ -218,11 +218,11 @@ function Hero() {
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-black/25 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/38 via-black/8 to-black/12 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-black/8 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto flex min-h-[62vh] sm:min-h-[68vh] max-h-[760px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-8 sm:pb-10">
-        <div className="grid w-full lg:grid-cols-[1.35fr_300px] gap-6 lg:gap-8 items-end">
+      <div className="relative z-10 mx-auto flex min-h-[56vh] sm:min-h-[60vh] max-h-[680px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-18 sm:pb-20">
+        <div className="w-full max-w-3xl text-white">
           <div className="max-w-3xl text-white">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/28 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur-md">
               <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
@@ -249,89 +249,64 @@ function Hero() {
               <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 guest rating</span>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div
-            key={`card-${index}`}
-            className="relative hidden lg:block max-w-[300px] justify-self-end animate-fade-up"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <div className="rounded-[2rem] border border-white/12 bg-black/24 p-4 text-white shadow-elevated backdrop-blur-lg">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-                  <Sparkles className="h-3 w-3" /> {active.badge}
-                </span>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold">
-                  <Star className="h-4 w-4 fill-[var(--sunset)] text-[var(--sunset)]" />
-                  {active.rating}
-                </span>
+      <div
+        className="absolute inset-x-4 bottom-4 z-20 sm:inset-x-6 sm:bottom-6"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[1.75rem] border border-white/14 bg-black/24 px-4 py-3 text-white backdrop-blur-lg">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                <Sparkles className="h-3 w-3" /> {active.badge}
+              </span>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/90">
+                <Star className="h-4 w-4 fill-[var(--sunset)] text-[var(--sunset)]" />
+                {active.rating}
+              </span>
+            </div>
+            <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+              <div className="min-w-0">
+                <p className="truncate font-display text-lg font-bold sm:text-xl">{active.name}</p>
+                <p className="truncate text-sm text-white/72">{active.location} · {active.specs.beds} beds · {active.specs.seats} seats · {active.specs.mpg}</p>
               </div>
-              <h3 className="mt-3 font-display text-xl font-bold leading-tight">{active.name}</h3>
-              <p className="text-sm text-white/70 mt-1">{active.tagline}</p>
-              <p className="mt-2 text-xs text-white/60 inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {active.location}</p>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <MicroSpec icon={<BedDouble className="h-3.5 w-3.5" />}>{active.specs.beds} beds</MicroSpec>
-                <MicroSpec icon={<Users className="h-3.5 w-3.5" />}>{active.specs.seats} seats</MicroSpec>
-                <MicroSpec icon={<Gauge className="h-3.5 w-3.5" />}>{active.specs.mpg}</MicroSpec>
-              </div>
-
-              <div className="mt-4 flex items-end justify-between border-t border-white/12 pt-4">
+              <div className="flex items-end gap-5 text-sm">
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
-                  <p className="font-display text-[1.75rem] font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
+                  <p className="font-display text-2xl font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
                 </div>
-                <div className="text-right">
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Or own for</p>
-                  <p className="font-display font-bold text-xl text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
+                <div className="hidden sm:block text-right">
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Own for</p>
+                  <p className="font-display text-lg font-bold text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
                 </div>
-              </div>
-              <button className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white py-3 font-semibold text-foreground transition hover:opacity-95">
-                Reserve this van <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div className="mt-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                {luxuryFleet.map((_, i) => (
-                  <button
-                    key={i}
-                    aria-label={`Go to slide ${i + 1}`}
-                    onClick={() => go(i)}
-                    className="h-1.5 rounded-full transition-all"
-                    style={{
-                      width: i === index ? 32 : 12,
-                      background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.4)",
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full glass-dark text-white hover:bg-white/20 transition">
-                  <ArrowLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full bg-[var(--sunset)] text-white shadow-glow hover:-translate-y-0.5 transition">
-                  <ArrowRight className="h-4 w-4" />
-                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="absolute inset-x-4 bottom-4 z-20 sm:inset-x-6 sm:bottom-6 lg:hidden">
-          <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/15 bg-black/28 px-4 py-3 text-white backdrop-blur-xl">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/65">Now showing</p>
-              <p className="mt-1 font-display text-lg font-bold leading-tight">{active.name}</p>
+          <div className="flex shrink-0 items-center gap-2">
+            <div className="hidden md:flex items-center gap-2 pr-2">
+              {luxuryFleet.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => go(i)}
+                  className="h-1.5 rounded-full transition-all"
+                  style={{
+                    width: i === index ? 30 : 12,
+                    background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.42)",
+                  }}
+                />
+              ))}
             </div>
-            <div className="flex gap-2">
-              <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20">
-                <ArrowLeft className="h-4 w-4" />
-              </button>
-              <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full text-white shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
+            <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20">
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full text-white shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
