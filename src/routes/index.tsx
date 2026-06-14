@@ -221,8 +221,8 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-black/25 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto flex min-h-[62vh] sm:min-h-[68vh] max-h-[760px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-12">
-        <div className="grid w-full lg:grid-cols-[1.2fr_340px] gap-6 lg:gap-10 items-end">
+      <div className="relative z-10 mx-auto flex min-h-[62vh] sm:min-h-[68vh] max-h-[760px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-8 sm:pb-10">
+        <div className="grid w-full lg:grid-cols-[1.35fr_300px] gap-6 lg:gap-8 items-end">
           <div className="max-w-3xl text-white">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/28 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur-md">
               <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
@@ -252,11 +252,11 @@ function Hero() {
 
           <div
             key={`card-${index}`}
-            className="relative hidden lg:block animate-fade-up"
+            className="relative hidden lg:block max-w-[300px] justify-self-end animate-fade-up"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="rounded-3xl border border-white/15 bg-black/32 p-5 text-white shadow-elevated backdrop-blur-xl">
+            <div className="rounded-[2rem] border border-white/12 bg-black/24 p-4 text-white shadow-elevated backdrop-blur-lg">
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
                   <Sparkles className="h-3 w-3" /> {active.badge}
@@ -266,7 +266,7 @@ function Hero() {
                   {active.rating}
                 </span>
               </div>
-              <h3 className="mt-3 font-display font-bold text-2xl leading-tight">{active.name}</h3>
+              <h3 className="mt-3 font-display text-xl font-bold leading-tight">{active.name}</h3>
               <p className="text-sm text-white/70 mt-1">{active.tagline}</p>
               <p className="mt-2 text-xs text-white/60 inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {active.location}</p>
 
@@ -276,10 +276,10 @@ function Hero() {
                 <MicroSpec icon={<Gauge className="h-3.5 w-3.5" />}>{active.specs.mpg}</MicroSpec>
               </div>
 
-              <div className="mt-5 flex items-end justify-between border-t border-white/15 pt-4">
+              <div className="mt-4 flex items-end justify-between border-t border-white/12 pt-4">
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
-                  <p className="font-display font-black text-3xl">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
+                  <p className="font-display text-[1.75rem] font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] uppercase tracking-widest text-white/60">Or own for</p>
@@ -291,7 +291,7 @@ function Hero() {
               </button>
             </div>
 
-            <div className="mt-4 flex items-center justify-between">
+            <div className="mt-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {luxuryFleet.map((_, i) => (
                   <button
