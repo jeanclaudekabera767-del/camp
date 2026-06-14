@@ -136,6 +136,9 @@ function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 -mt-6 sm:-mt-8">
+        <SearchBar />
+      </div>
       <Categories />
       <FeaturedVans />
       <HowItWorks />
@@ -200,8 +203,7 @@ function Hero() {
   const active = luxuryFleet[index];
 
   return (
-    <section className="relative min-h-[75vh] max-h-[850px] w-full overflow-hidden">
-      {/* Sliding image track — real horizontal motion */}
+    <section className="relative isolate min-h-[56vh] sm:min-h-[60vh] max-h-[680px] w-full overflow-hidden">
       <div
         className="absolute inset-0 flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
         style={{ width: `${total * 100}%`, transform: `translateX(-${index * (100 / total)}%)` }}
@@ -214,112 +216,104 @@ function Hero() {
               width={1920}
               height={1080}
               loading={i === 0 ? "eager" : "lazy"}
-              className={`h-full w-full object-cover ${i === index ? "animate-kenburns" : ""}`}
+              className={`h-full w-full object-cover object-center ${i === index ? "animate-kenburns" : ""}`}
             />
           </div>
         ))}
       </div>
-      {/* Light overlays so real van photos stay clearly visible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-background/5 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/38 via-black/8 to-black/12 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-black/8 pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-28 sm:pt-36 pb-20">
-        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-end">
-          {/* Left: copy */}
-          <div className="text-white">
-            <span className="inline-flex items-center gap-2 glass-dark text-white/90 text-[11px] font-semibold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
+      <div className="relative z-10 mx-auto flex min-h-[56vh] sm:min-h-[60vh] max-h-[680px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-18 sm:pb-20">
+        <div className="w-full max-w-3xl text-white">
+          <div className="max-w-3xl text-white">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/28 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur-md">
               <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
               Luxury Fleet · USA & Europe
             </span>
-            <h1 key={index} className="mt-5 font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up">
+            <h1 key={index} className="mt-4 font-display font-black text-4xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up text-balance">
               Explore Without
               <span className="block gradient-text">Limits.</span>
             </h1>
-            <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-xl">
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/90">
               Rent or own hand-picked, premium camper vans across two continents — designed for the road less travelled.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#rent" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#rent" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
                 Rent a Luxury Van <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#buy" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
+              <a href="#buy" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
                 Buy a Camper
               </a>
             </div>
-          </div>
-
-          {/* Right: luxury price card */}
-          <div
-            key={`card-${index}`}
-            className="relative animate-fade-up"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <div className="glass-dark rounded-3xl p-5 sm:p-6 text-white shadow-elevated border border-white/15">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[var(--sunset)]/90 text-white">
-                  <Sparkles className="h-3 w-3" /> {active.badge}
-                </span>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold">
-                  <Star className="h-4 w-4 fill-[var(--sunset)] text-[var(--sunset)]" />
-                  {active.rating}
-                </span>
-              </div>
-              <h3 className="mt-3 font-display font-bold text-2xl leading-tight">{active.name}</h3>
-              <p className="text-sm text-white/70 mt-1">{active.tagline}</p>
-              <p className="mt-2 text-xs text-white/60 inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {active.location}</p>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <MicroSpec icon={<BedDouble className="h-3.5 w-3.5" />}>{active.specs.beds} beds</MicroSpec>
-                <MicroSpec icon={<Users className="h-3.5 w-3.5" />}>{active.specs.seats} seats</MicroSpec>
-                <MicroSpec icon={<Gauge className="h-3.5 w-3.5" />}>{active.specs.mpg}</MicroSpec>
-              </div>
-
-              <div className="mt-5 flex items-end justify-between border-t border-white/15 pt-4">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
-                  <p className="font-display font-black text-3xl">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Or own for</p>
-                  <p className="font-display font-bold text-xl text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
-                </div>
-              </div>
-              <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-foreground font-semibold py-3 hover:opacity-95 transition">
-                Reserve this van <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Slider controls */}
-            <div className="mt-5 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                {luxuryFleet.map((_, i) => (
-                  <button
-                    key={i}
-                    aria-label={`Go to slide ${i + 1}`}
-                    onClick={() => go(i)}
-                    className="h-1.5 rounded-full transition-all"
-                    style={{
-                      width: i === index ? 32 : 12,
-                      background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.4)",
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full glass-dark text-white hover:bg-white/20 transition">
-                  <ArrowLeft className="h-4 w-4" />
-                </button>
-                <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full bg-[var(--sunset)] text-white shadow-glow hover:-translate-y-0.5 transition">
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/90">
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Verified premium vans</span>
+              <span className="inline-flex items-center gap-2"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 120+ pickup cities</span>
+              <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 guest rating</span>
             </div>
           </div>
         </div>
-
-        <SearchBar />
       </div>
+
+      <div
+        className="absolute inset-x-4 bottom-4 z-20 sm:inset-x-6 sm:bottom-6"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[1.75rem] border border-white/14 bg-black/24 px-4 py-3 text-white backdrop-blur-lg">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                <Sparkles className="h-3 w-3" /> {active.badge}
+              </span>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/90">
+                <Star className="h-4 w-4 fill-[var(--sunset)] text-[var(--sunset)]" />
+                {active.rating}
+              </span>
+            </div>
+            <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+              <div className="min-w-0">
+                <p className="truncate font-display text-lg font-bold sm:text-xl">{active.name}</p>
+                <p className="truncate text-sm text-white/72">{active.location} · {active.specs.beds} beds · {active.specs.seats} seats · {active.specs.mpg}</p>
+              </div>
+              <div className="flex items-end gap-5 text-sm">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
+                  <p className="font-display text-2xl font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
+                </div>
+                <div className="hidden sm:block text-right">
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Own for</p>
+                  <p className="font-display text-lg font-bold text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <div className="hidden md:flex items-center gap-2 pr-2">
+              {luxuryFleet.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => go(i)}
+                  className="h-1.5 rounded-full transition-all"
+                  style={{
+                    width: i === index ? 30 : 12,
+                    background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.42)",
+                  }}
+                />
+              ))}
+            </div>
+            <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20">
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full text-white shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }
@@ -334,7 +328,7 @@ function MicroSpec({ icon, children }: { icon: React.ReactNode; children: React.
 
 function SearchBar() {
   return (
-    <div className="relative mt-12 sm:mt-16 animate-fade-up">
+    <div className="relative animate-fade-up">
       <div className="glass rounded-3xl p-2 sm:p-3 shadow-elevated max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1.2fr_1.4fr_1fr_auto] gap-1">
           <Field icon={<MapPin className="h-4 w-4" />} label="Pickup" placeholder="City or country" />
@@ -347,7 +341,7 @@ function SearchBar() {
           </button>
         </div>
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-white/80">
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/70">
         <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Free cancellation</span>
         <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 average rating</span>
         <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 7 countries · 120+ cities</span>
