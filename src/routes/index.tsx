@@ -200,8 +200,7 @@ function Hero() {
   const active = luxuryFleet[index];
 
   return (
-    <section className="relative min-h-[75vh] max-h-[850px] w-full overflow-hidden">
-      {/* Sliding image track — real horizontal motion */}
+    <section className="relative isolate min-h-[62vh] sm:min-h-[68vh] max-h-[760px] w-full overflow-hidden">
       <div
         className="absolute inset-0 flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
         style={{ width: `${total * 100}%`, transform: `translateX(-${index * (100 / total)}%)` }}
@@ -214,50 +213,52 @@ function Hero() {
               width={1920}
               height={1080}
               loading={i === 0 ? "eager" : "lazy"}
-              className={`h-full w-full object-cover ${i === index ? "animate-kenburns" : ""}`}
+              className={`h-full w-full object-cover object-center ${i === index ? "animate-kenburns" : ""}`}
             />
           </div>
         ))}
       </div>
-      {/* Light overlays so real van photos stay clearly visible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-background/5 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-black/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-28 sm:pt-36 pb-20">
-        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-end">
-          {/* Left: copy */}
-          <div className="text-white">
-            <span className="inline-flex items-center gap-2 glass-dark text-white/90 text-[11px] font-semibold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
+      <div className="relative z-10 mx-auto flex min-h-[62vh] sm:min-h-[68vh] max-h-[760px] max-w-7xl items-end px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-12">
+        <div className="grid w-full lg:grid-cols-[1.2fr_340px] gap-6 lg:gap-10 items-end">
+          <div className="max-w-3xl text-white">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/28 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur-md">
               <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
               Luxury Fleet · USA & Europe
             </span>
-            <h1 key={index} className="mt-5 font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up">
+            <h1 key={index} className="mt-4 font-display font-black text-4xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up text-balance">
               Explore Without
               <span className="block gradient-text">Limits.</span>
             </h1>
-            <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-xl">
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/90">
               Rent or own hand-picked, premium camper vans across two continents — designed for the road less travelled.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#rent" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#rent" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
                 Rent a Luxury Van <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#buy" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
+              <a href="#buy" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
                 Buy a Camper
               </a>
             </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/90">
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Verified premium vans</span>
+              <span className="inline-flex items-center gap-2"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 120+ pickup cities</span>
+              <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 guest rating</span>
+            </div>
           </div>
 
-          {/* Right: luxury price card */}
           <div
             key={`card-${index}`}
-            className="relative animate-fade-up"
+            className="relative hidden lg:block animate-fade-up"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="glass-dark rounded-3xl p-5 sm:p-6 text-white shadow-elevated border border-white/15">
+            <div className="rounded-3xl border border-white/15 bg-black/32 p-5 text-white shadow-elevated backdrop-blur-xl">
               <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[var(--sunset)]/90 text-white">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
                   <Sparkles className="h-3 w-3" /> {active.badge}
                 </span>
                 <span className="inline-flex items-center gap-1 text-sm font-semibold">
@@ -285,13 +286,12 @@ function Hero() {
                   <p className="font-display font-bold text-xl text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
                 </div>
               </div>
-              <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-foreground font-semibold py-3 hover:opacity-95 transition">
+              <button className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white py-3 font-semibold text-foreground transition hover:opacity-95">
                 Reserve this van <ArrowRight className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Slider controls */}
-            <div className="mt-5 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {luxuryFleet.map((_, i) => (
                   <button
@@ -318,6 +318,25 @@ function Hero() {
           </div>
         </div>
 
+        <div className="absolute inset-x-4 bottom-4 z-20 sm:inset-x-6 sm:bottom-6 lg:hidden">
+          <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/15 bg-black/28 px-4 py-3 text-white backdrop-blur-xl">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-white/65">Now showing</p>
+              <p className="mt-1 font-display text-lg font-bold leading-tight">{active.name}</p>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20">
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full text-white shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto -mt-2 max-w-7xl px-4 pb-10 sm:px-6 sm:pb-14 lg:-mt-6">
         <SearchBar />
       </div>
     </section>
