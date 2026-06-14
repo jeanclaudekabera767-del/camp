@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MapPin,
   Calendar,
@@ -15,7 +15,10 @@ import {
   ShieldCheck,
   Sparkles,
   ArrowRight,
+  ArrowLeft,
   Menu,
+  Crown,
+  Gauge,
 } from "lucide-react";
 
 import heroVan from "@/assets/hero-van.jpg";
@@ -28,6 +31,57 @@ import catBudget from "@/assets/cat-budget.jpg";
 import van1 from "@/assets/van-1.jpg";
 import van2 from "@/assets/van-2.jpg";
 import van3 from "@/assets/van-3.jpg";
+import lux1 from "@/assets/luxury-1.jpg";
+import lux2 from "@/assets/luxury-2.jpg";
+import lux3 from "@/assets/luxury-3.jpg";
+import lux4 from "@/assets/luxury-4.jpg";
+
+const luxuryFleet = [
+  {
+    img: lux1,
+    badge: "Signature Collection",
+    name: "Mercedes Sprinter Noir Edition",
+    tagline: "Hand-crafted leather · Cliffside ready",
+    location: "Malibu, California",
+    rent: 389,
+    sale: 168500,
+    rating: 4.98,
+    specs: { beds: 2, seats: 4, mpg: "22 mpg" },
+  },
+  {
+    img: lux2,
+    badge: "Overland Luxury",
+    name: "Alpine Summit 4×4 Pop-Top",
+    tagline: "Off-grid solar · Rooftop suite",
+    location: "Chamonix, France",
+    rent: 329,
+    sale: 142000,
+    rating: 4.95,
+    specs: { beds: 4, seats: 4, mpg: "19 mpg" },
+  },
+  {
+    img: lux3,
+    badge: "Class B Premium",
+    name: "Canyon Silver Voyager",
+    tagline: "Panoramic windows · Auto-glide doors",
+    location: "Moab, Utah",
+    rent: 279,
+    sale: 124900,
+    rating: 4.92,
+    specs: { beds: 2, seats: 4, mpg: "24 mpg" },
+  },
+  {
+    img: lux4,
+    badge: "Glass Roof Suite",
+    name: "Lakeside Skyview Camper",
+    tagline: "Stargazer roof · Teak interior",
+    location: "Bavaria, Germany",
+    rent: 259,
+    sale: 119000,
+    rating: 4.97,
+    specs: { beds: 2, seats: 4, mpg: "21 mpg" },
+  },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -132,47 +186,152 @@ function Nav() {
 }
 
 function Hero() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = luxuryFleet.length;
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), 5500);
+    return () => clearInterval(id);
+  }, [paused, total]);
+
+  const go = (n: number) => setIndex((n + total) % total);
+  const active = luxuryFleet[index];
+
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden">
-      <img
-        src={heroVan}
-        alt="Camper van overlooking a mountain valley at sunset"
-        width={1920}
-        height={1080}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+    <section
+      className="relative min-h-[100svh] w-full overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Sliding image stack */}
+      <div className="absolute inset-0">
+        {luxuryFleet.map((v, i) => (
+          <div
+            key={v.name}
+            className="absolute inset-0 transition-all duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
+            style={{
+              opacity: i === index ? 1 : 0,
+              transform: `scale(${i === index ? 1.04 : 1.12}) translateX(${(i - index) * 6}%)`,
+            }}
+          >
+            <img
+              src={v.img}
+              alt={v.name}
+              width={1920}
+              height={1080}
+              loading={i === 0 ? "eager" : "lazy"}
+              className="h-full w-full object-cover animate-kenburns"
+            />
+          </div>
+        ))}
+      </div>
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-40 sm:pt-48 pb-32">
-        <div className="max-w-3xl text-white animate-fade-up">
-          <span className="inline-flex items-center gap-2 glass-dark text-white/90 text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full">
-            <Sparkles className="h-3.5 w-3.5 text-[var(--sunset)]" />
-            USA · Europe · 3,500+ vans
-          </span>
-          <h1 className="mt-5 font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02]">
-            Explore Without Limits.
-            <span className="block gradient-text">Rent or Buy your dream camper.</span>
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-2xl">
-            Discover the freedom of the open road with premium camper vans, RVs and motorhomes across the USA and Europe.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#rent" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
-              Rent a Camper <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#buy" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
-              Buy a Camper
-            </a>
-            <a href="#list" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-white/90 font-semibold hover:text-white transition">
-              List your vehicle →
-            </a>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-32 sm:pt-44 pb-28">
+        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-end">
+          {/* Left: copy */}
+          <div className="text-white">
+            <span className="inline-flex items-center gap-2 glass-dark text-white/90 text-[11px] font-semibold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
+              <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
+              Luxury Fleet · USA & Europe
+            </span>
+            <h1 key={index} className="mt-5 font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up">
+              Explore Without
+              <span className="block gradient-text">Limits.</span>
+            </h1>
+            <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-xl">
+              Rent or own hand-picked, premium camper vans across two continents — designed for the road less travelled.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#rent" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
+                Rent a Luxury Van <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href="#buy" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
+                Buy a Camper
+              </a>
+            </div>
+          </div>
+
+          {/* Right: luxury price card */}
+          <div key={`card-${index}`} className="relative animate-fade-up">
+            <div className="glass-dark rounded-3xl p-5 sm:p-6 text-white shadow-elevated border border-white/15">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[var(--sunset)]/90 text-white">
+                  <Sparkles className="h-3 w-3" /> {active.badge}
+                </span>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold">
+                  <Star className="h-4 w-4 fill-[var(--sunset)] text-[var(--sunset)]" />
+                  {active.rating}
+                </span>
+              </div>
+              <h3 className="mt-3 font-display font-bold text-2xl leading-tight">{active.name}</h3>
+              <p className="text-sm text-white/70 mt-1">{active.tagline}</p>
+              <p className="mt-2 text-xs text-white/60 inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {active.location}</p>
+
+              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                <MicroSpec icon={<BedDouble className="h-3.5 w-3.5" />}>{active.specs.beds} beds</MicroSpec>
+                <MicroSpec icon={<Users className="h-3.5 w-3.5" />}>{active.specs.seats} seats</MicroSpec>
+                <MicroSpec icon={<Gauge className="h-3.5 w-3.5" />}>{active.specs.mpg}</MicroSpec>
+              </div>
+
+              <div className="mt-5 flex items-end justify-between border-t border-white/15 pt-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
+                  <p className="font-display font-black text-3xl">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Or own for</p>
+                  <p className="font-display font-bold text-xl text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
+                </div>
+              </div>
+              <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-foreground font-semibold py-3 hover:opacity-95 transition">
+                Reserve this van <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Slider controls */}
+            <div className="mt-5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {luxuryFleet.map((_, i) => (
+                  <button
+                    key={i}
+                    aria-label={`Go to slide ${i + 1}`}
+                    onClick={() => go(i)}
+                    className="h-1.5 rounded-full transition-all"
+                    style={{
+                      width: i === index ? 32 : 12,
+                      background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.4)",
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => go(index - 1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full glass-dark text-white hover:bg-white/20 transition">
+                  <ArrowLeft className="h-4 w-4" />
+                </button>
+                <button onClick={() => go(index + 1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full bg-[var(--sunset)] text-white shadow-glow hover:-translate-y-0.5 transition">
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <SearchBar />
       </div>
     </section>
+  );
+}
+
+function MicroSpec({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-center gap-1.5 rounded-xl bg-white/10 border border-white/10 px-2 py-2 text-xs font-medium">
+      {icon} <span>{children}</span>
+    </div>
   );
 }
 
