@@ -163,11 +163,11 @@ function Nav() {
             <span className="text-foreground">CampVan</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-foreground/80">
-            <a href="#rent" className="hover:text-foreground transition">Rent</a>
-            <a href="#buy" className="hover:text-foreground transition">Buy</a>
-            <a href="#destinations" className="hover:text-foreground transition">Destinations</a>
-            <a href="#how" className="hover:text-foreground transition">How it works</a>
-            <a href="#list" className="hover:text-foreground transition">List your van</a>
+            <Link to="/rent" className="hover:text-foreground transition">Rent</Link>
+            <Link to="/buy" className="hover:text-foreground transition">Buy</Link>
+            <Link to="/destinations" className="hover:text-foreground transition">Destinations</Link>
+            <Link to="/how-it-works" className="hover:text-foreground transition">How it works</Link>
+            <Link to="/list-your-van" className="hover:text-foreground transition">List your van</Link>
           </nav>
           <div className="hidden md:flex items-center gap-2">
             <button className="px-4 py-2 text-sm font-semibold rounded-full hover:bg-white/40 transition">Sign in</button>
@@ -179,7 +179,11 @@ function Nav() {
         </div>
         {open && (
           <div className="md:hidden glass mt-2 rounded-3xl p-4 flex flex-col gap-2 text-sm font-medium">
-            <a href="#rent">Rent</a><a href="#buy">Buy</a><a href="#destinations">Destinations</a><a href="#how">How it works</a><a href="#list">List your van</a>
+            <Link to="/rent" onClick={() => setOpen(false)}>Rent</Link>
+            <Link to="/buy" onClick={() => setOpen(false)}>Buy</Link>
+            <Link to="/destinations" onClick={() => setOpen(false)}>Destinations</Link>
+            <Link to="/how-it-works" onClick={() => setOpen(false)}>How it works</Link>
+            <Link to="/list-your-van" onClick={() => setOpen(false)}>List your van</Link>
             <button className="mt-2 px-4 py-2 rounded-full bg-foreground text-background">Get started</button>
           </div>
         )}
