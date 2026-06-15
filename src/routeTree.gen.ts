@@ -9,9 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RentRouteImport } from './routes/rent'
+import { Route as ListYourVanRouteImport } from './routes/list-your-van'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as BuyRouteImport } from './routes/buy'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
+const RentRoute = RentRouteImport.update({
+  id: '/rent',
+  path: '/rent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListYourVanRoute = ListYourVanRouteImport.update({
+  id: '/list-your-van',
+  path: '/list-your-van',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsRoute = DestinationsRouteImport.update({
+  id: '/destinations',
+  path: '/destinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyRoute = BuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +55,109 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buy': typeof BuyRoute
+  '/destinations': typeof DestinationsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/list-your-van': typeof ListYourVanRoute
+  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buy': typeof BuyRoute
+  '/destinations': typeof DestinationsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/list-your-van': typeof ListYourVanRoute
+  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buy': typeof BuyRoute
+  '/destinations': typeof DestinationsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/list-your-van': typeof ListYourVanRoute
+  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/category/$slug'
+  fullPaths:
+    | '/'
+    | '/buy'
+    | '/destinations'
+    | '/how-it-works'
+    | '/list-your-van'
+    | '/rent'
+    | '/category/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/category/$slug'
-  id: '__root__' | '/' | '/category/$slug'
+  to:
+    | '/'
+    | '/buy'
+    | '/destinations'
+    | '/how-it-works'
+    | '/list-your-van'
+    | '/rent'
+    | '/category/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/buy'
+    | '/destinations'
+    | '/how-it-works'
+    | '/list-your-van'
+    | '/rent'
+    | '/category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuyRoute: typeof BuyRoute
+  DestinationsRoute: typeof DestinationsRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  ListYourVanRoute: typeof ListYourVanRoute
+  RentRoute: typeof RentRoute
   CategorySlugRoute: typeof CategorySlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rent': {
+      id: '/rent'
+      path: '/rent'
+      fullPath: '/rent'
+      preLoaderRoute: typeof RentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/list-your-van': {
+      id: '/list-your-van'
+      path: '/list-your-van'
+      fullPath: '/list-your-van'
+      preLoaderRoute: typeof ListYourVanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations': {
+      id: '/destinations'
+      path: '/destinations'
+      fullPath: '/destinations'
+      preLoaderRoute: typeof DestinationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buy': {
+      id: '/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof BuyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuyRoute: BuyRoute,
+  DestinationsRoute: DestinationsRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  ListYourVanRoute: ListYourVanRoute,
+  RentRoute: RentRoute,
   CategorySlugRoute: CategorySlugRoute,
 }
 export const routeTree = rootRouteImport
