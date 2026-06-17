@@ -108,9 +108,9 @@ function CategoryPage() {
           </div>
 
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {data.vans.map((v, i) => (
+            {data.vans.map((v: Van, i: number) => (
               <article key={`${v.name}-${i}`} className="group rounded-3xl bg-white shadow-soft hover:shadow-elevated transition overflow-hidden border border-black/5">
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <Link to="/van/$slug/$idx" params={{ slug: data.slug, idx: String(i) }} className="block relative aspect-[4/3] overflow-hidden">
                   <img src={v.img} alt={v.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                   {v.badge && (
                     <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[var(--sunset)] text-white text-[11px] font-bold uppercase tracking-wider shadow-glow">
@@ -120,11 +120,13 @@ function CategoryPage() {
                   <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-xs font-bold">
                     <Star className="h-3 w-3 fill-[var(--sunset)] text-[var(--sunset)]" /> {v.rating}
                   </span>
-                </div>
+                </Link>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-display font-bold text-lg leading-tight">{v.name}</h3>
+                      <Link to="/van/$slug/$idx" params={{ slug: data.slug, idx: String(i) }} className="hover:underline">
+                        <h3 className="font-display font-bold text-lg leading-tight">{v.name}</h3>
+                      </Link>
                       <p className="mt-1 inline-flex items-center gap-1 text-xs text-foreground/60">
                         <MapPin className="h-3 w-3" /> {v.location}
                       </p>
@@ -135,15 +137,28 @@ function CategoryPage() {
                     <span className="inline-flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {v.seats}</span>
                     <span className="inline-flex items-center gap-1"><Fuel className="h-3.5 w-3.5" /> {v.fuel}</span>
                   </div>
-                  <div className="mt-5 flex items-end justify-between border-t border-black/5 pt-4">
+                  <div className="mt-5 flex items-end justify-between border-t border-black/5 pt-4 gap-3">
                     <div>
                       <div className="text-xs text-foreground/60">From</div>
                       <div className="font-display font-black text-xl">${v.rent}<span className="text-xs font-medium text-foreground/60">/day</span></div>
                       <div className="text-[11px] text-foreground/60 mt-0.5">or buy from ${v.sale.toLocaleString()}</div>
                     </div>
-                    <button className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition">
-                      View <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
+                    <div className="flex flex-col gap-2">
+                      <button
+                        onClick={() => add({ slug: data.slug, idx: i, name: v.name, img: v.img, location: v.location, mode: "rent", price: v.rent, days: 3, qty: 1 })}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground text-xs font-semibold transition"
+                        aria-label={`Add ${v.name} to cart`}
+                      >
+                        <ShoppingCart className="h-3.5 w-3.5" /> Add
+                      </button>
+                      <Link
+                        to="/van/$slug/$idx"
+                        params={{ slug: data.slug, idx: String(i) }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition"
+                      >
+                        View <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </article>
