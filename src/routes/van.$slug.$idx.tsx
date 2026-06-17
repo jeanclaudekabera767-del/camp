@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Calendar, Check } from "lucide-react";
 import { useState } from "react";
-import { categories, getVan } from "@/lib/categories";
+import { categories, getVan, type Van } from "@/lib/categories";
 import { useCart } from "@/lib/cart";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 
@@ -48,7 +48,7 @@ function VanPage() {
   const [days, setDays] = useState(5);
   const [added, setAdded] = useState(false);
 
-  const related = category.vans.filter((_v, i) => i !== idx).slice(0, 3);
+  const related: Van[] = category.vans.filter((_v: Van, i: number) => i !== idx).slice(0, 3);
 
   function handleAdd(go?: boolean) {
     add({
@@ -183,7 +183,7 @@ function VanPage() {
             <section className="mt-16">
               <h2 className="font-display font-black text-2xl">More {category.name.toLowerCase()}</h2>
               <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {related.map((r) => {
+                {related.map((r: Van) => {
                   const ri = category.vans.indexOf(r);
                   return (
                     <Link
