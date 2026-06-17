@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useState, type ReactNode } from "react";
+import { useCart } from "@/lib/cart";
 
 const navLinks = [
   { to: "/rent", label: "Rent" },
@@ -12,6 +13,7 @@ const navLinks = [
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-4">
@@ -30,12 +32,30 @@ export function SiteNav() {
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-2">
+            <Link to="/cart" aria-label="Cart" className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-white/40 transition">
+              <ShoppingCart className="h-5 w-5" />
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 grid place-items-center rounded-full bg-[var(--sunset)] text-white text-[10px] font-bold">
+                  {count}
+                </span>
+              )}
+            </Link>
             <button className="px-4 py-2 text-sm font-semibold rounded-full hover:bg-white/40 transition">Sign in</button>
             <button className="px-4 py-2 text-sm font-semibold rounded-full bg-foreground text-background hover:opacity-90 transition">Get started</button>
           </div>
-          <button onClick={() => setOpen(!open)} className="md:hidden grid h-9 w-9 place-items-center rounded-full bg-white/60">
-            <Menu className="h-5 w-5" />
-          </button>
+          <div className="md:hidden flex items-center gap-1">
+            <Link to="/cart" aria-label="Cart" className="relative grid h-9 w-9 place-items-center rounded-full bg-white/60">
+              <ShoppingCart className="h-4 w-4" />
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 grid place-items-center rounded-full bg-[var(--sunset)] text-white text-[10px] font-bold">
+                  {count}
+                </span>
+              )}
+            </Link>
+            <button onClick={() => setOpen(!open)} className="grid h-9 w-9 place-items-center rounded-full bg-white/60">
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         {open && (
           <div className="md:hidden glass mt-2 rounded-3xl p-4 flex flex-col gap-2 text-sm font-medium">
