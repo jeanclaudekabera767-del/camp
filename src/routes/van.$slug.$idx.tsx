@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Calendar, Check } from "lucide-react";
 import { useState } from "react";
-import { categories, getVan, type Van } from "@/lib/categories";
+import { getVan, type Van } from "@/lib/categories";
 import { useCart } from "@/lib/cart";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 
