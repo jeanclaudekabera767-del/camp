@@ -48,7 +48,7 @@ function VanPage() {
   const [days, setDays] = useState(5);
   const [added, setAdded] = useState(false);
 
-  const related = category.vans.filter((_, i) => i !== idx).slice(0, 3);
+  const related = category.vans.filter((_v, i) => i !== idx).slice(0, 3);
 
   function handleAdd(go?: boolean) {
     add({
