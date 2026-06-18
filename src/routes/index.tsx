@@ -583,26 +583,26 @@ function CTA() {
           <div className="relative grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sand)]">Own a camper?</span>
-              <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl leading-tight">Turn your van into a road-trip business.</h2>
-              <p className="mt-4 text-white/85 text-lg max-w-xl">List your vehicle in minutes. Set your prices, your rules, and earn an average of $1,800/month.</p>
+              <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl leading-tight">Sell your van for the price it deserves.</h2>
+              <p className="mt-4 text-white/85 text-lg max-w-xl">List your camper in minutes. Our team handles inspection, photography and paperwork — most vans sell within 3 weeks.</p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <a href="#" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
-                  List your vehicle <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href="#" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
+                <Link to="/list-your-van" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
+                  Sell your van <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link to="/how-it-works" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
                   Learn more
-                </a>
+                </Link>
               </div>
             </div>
             <div className="glass rounded-3xl p-6 text-foreground">
-              <p className="text-sm text-foreground/70">Estimated monthly earnings</p>
-              <p className="font-display font-black text-5xl mt-1">$1,840</p>
+              <p className="text-sm text-foreground/70">Average selling price</p>
+              <p className="font-display font-black text-5xl mt-1">$84,500</p>
               <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-                <Mini k="22" v="nights" />
-                <Mini k="4.9★" v="rating" />
-                <Mini k="0%" v="setup fee" />
+                <Mini k="21 days" v="to sell" />
+                <Mini k="4.9★" v="seller rating" />
+                <Mini k="0%" v="listing fee" />
               </div>
-              <p className="text-xs text-foreground/60 mt-4">Based on a Sprinter-class van listed in California, last 12 months.</p>
+              <p className="text-xs text-foreground/60 mt-4">Based on Sprinter-class vans sold through CampVan, last 12 months.</p>
             </div>
           </div>
         </div>
