@@ -512,9 +512,9 @@ function Destinations() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sunset)]">Pickup locations</span>
-            <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl">Two continents.<br/>One endless road.</h2>
-            <p className="mt-4 text-white/75 text-lg">Pickup hubs across the US and Europe, with one-way rentals between most major cities.</p>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sunset)]">Delivery network</span>
+            <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl">Two continents.<br/>One handover address — yours.</h2>
+            <p className="mt-4 text-white/75 text-lg">Concierge delivery hubs across the US and Europe, with door-to-door shipping to most major cities.</p>
           </div>
           <div className="glass-dark rounded-3xl p-4 grid grid-cols-2 gap-2">
             <Stat k="3,500+" v="Vehicles" />
