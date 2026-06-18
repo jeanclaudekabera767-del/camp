@@ -54,9 +54,9 @@ function HowPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20">
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { icon: ShieldCheck, title: "Verified hosts", desc: "Every owner is identity-checked and reviewed." },
-            { icon: Sparkles, title: "Premium fleet", desc: "Hand-picked vans, regularly serviced." },
-            { icon: Star, title: "4.9★ average", desc: "Over 40,000 trips and counting." },
+            { icon: ShieldCheck, title: "Verified sellers", desc: "Every seller is identity-checked and their van inspected." },
+            { icon: Sparkles, title: "Premium marketplace", desc: "Hand-picked vans, full service history." },
+            { icon: Star, title: "4.9★ average", desc: "Trusted by buyers across two continents." },
           ].map((p) => (
             <div key={p.title} className="rounded-3xl p-6 border border-foreground/10">
               <p.icon className="h-5 w-5 text-[var(--sunset)]" />
