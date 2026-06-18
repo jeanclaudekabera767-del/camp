@@ -139,13 +139,13 @@ function CategoryPage() {
                   </div>
                   <div className="mt-5 flex items-end justify-between border-t border-black/5 pt-4 gap-3">
                     <div>
-                      <div className="text-xs text-foreground/60">From</div>
-                      <div className="font-display font-black text-xl">${v.rent}<span className="text-xs font-medium text-foreground/60">/day</span></div>
-                      <div className="text-[11px] text-foreground/60 mt-0.5">or buy from ${v.sale.toLocaleString()}</div>
+                      <div className="text-xs text-foreground/60">Price</div>
+                      <div className="font-display font-black text-xl">${v.sale.toLocaleString()}</div>
+                      <div className="text-[11px] text-foreground/60 mt-0.5">Financing from ${Math.round(v.sale / 60).toLocaleString()}/mo</div>
                     </div>
                     <div className="flex flex-col gap-2">
                       <button
-                        onClick={() => add({ slug: data.slug, idx: i, name: v.name, img: v.img, location: v.location, mode: "rent", price: v.rent, days: 3, qty: 1 })}
+                        onClick={() => add({ slug: data.slug, idx: i, name: v.name, img: v.img, location: v.location, price: v.sale, qty: 1 })}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground text-xs font-semibold transition"
                         aria-label={`Add ${v.name} to cart`}
                       >

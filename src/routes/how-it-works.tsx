@@ -4,25 +4,25 @@ import { Search, Calendar, MapPin, ShieldCheck, Sparkles, Star } from "lucide-re
 import heroHow from "@/assets/hero-lux-1.jpg";
 
 const steps = [
-  { icon: Search, title: "1. Search & compare", desc: "Filter by dates, location, sleeps, and amenities. Every van comes with a verified host." },
-  { icon: Calendar, title: "2. Book in minutes", desc: "Instant confirmation, transparent pricing, and free 24-hour cancellation." },
-  { icon: MapPin, title: "3. Pick up & roam", desc: "Meet your host, get the keys, hit the road. Roadside support included." },
+  { icon: Search, title: "1. Browse the marketplace", desc: "Filter by van type, location, year and budget. Every listing is inspected and verified." },
+  { icon: Calendar, title: "2. Reserve & finance", desc: "Place a refundable deposit, get financing pre-approval in 24 hours and lock in your price." },
+  { icon: MapPin, title: "3. Delivery & drive away", desc: "Doorstep delivery or concierge pickup. Keys in hand with a 12-month warranty." },
 ];
 
 const faqs = [
   { q: "Do I need a special license?", a: "For most vans, a standard driver's license is all you need. Larger Class A motorhomes may require additional endorsements depending on your country." },
-  { q: "Is insurance included?", a: "Yes — every rental includes comprehensive insurance and 24/7 roadside assistance." },
-  { q: "Can I take a van across borders?", a: "Many of our European hosts allow cross-border travel. Check the listing or message the host directly." },
-  { q: "What if I want to buy instead of rent?", a: "Browse our marketplace — every listing is inspected and financing is available." },
+  { q: "Is the van inspected before I buy?", a: "Yes — every van sold through CampVan passes a 200-point inspection with verified service history and title check." },
+  { q: "Do you offer financing?", a: "Yes. We partner with leading lenders to offer pre-approval in under 24 hours, with terms up to 84 months." },
+  { q: "Is there a return guarantee?", a: "Every purchase includes a 7-day money-back guarantee and a 12-month mechanical warranty." },
 ];
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
       { title: "How it Works — CampVan" },
-      { name: "description", content: "Booking a camper van takes three simple steps. Here's how CampVan works for renters and buyers." },
+      { name: "description", content: "Buying a camper van takes three simple steps. Here's how CampVan delivers an inspected, financed van to your door." },
       { property: "og:title", content: "How it Works — CampVan" },
-      { property: "og:description", content: "Search, book, and hit the road in minutes." },
+      { property: "og:description", content: "Browse, reserve, drive away — with delivery, financing and warranty included." },
       { property: "og:image", content: heroHow },
     ],
   }),
@@ -54,9 +54,9 @@ function HowPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20">
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { icon: ShieldCheck, title: "Verified hosts", desc: "Every owner is identity-checked and reviewed." },
-            { icon: Sparkles, title: "Premium fleet", desc: "Hand-picked vans, regularly serviced." },
-            { icon: Star, title: "4.9★ average", desc: "Over 40,000 trips and counting." },
+            { icon: ShieldCheck, title: "Verified sellers", desc: "Every seller is identity-checked and their van inspected." },
+            { icon: Sparkles, title: "Premium marketplace", desc: "Hand-picked vans, full service history." },
+            { icon: Star, title: "4.9★ average", desc: "Trusted by buyers across two continents." },
           ].map((p) => (
             <div key={p.title} className="rounded-3xl p-6 border border-foreground/10">
               <p.icon className="h-5 w-5 text-[var(--sunset)]" />
@@ -80,7 +80,7 @@ function HowPage() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Link to="/rent" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition">
+          <Link to="/buy" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition">
             Start exploring vans
           </Link>
         </div>

@@ -86,10 +86,10 @@ const luxuryFleet = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CampVan — Rent or Buy Camper Vans across USA & Europe" },
-      { name: "description", content: "Discover the freedom of the open road. Rent or buy premium camper vans, RVs and motorhomes across the USA and Europe." },
-      { property: "og:title", content: "CampVan — Explore Without Limits" },
-      { property: "og:description", content: "Premium camper van rentals and sales across the USA and Europe." },
+      { title: "CampVan — Buy Premium Camper Vans across USA & Europe" },
+      { name: "description", content: "Shop a curated marketplace of inspected camper vans, RVs, and motorhomes for sale across the USA and Europe." },
+      { property: "og:title", content: "CampVan — Own the Open Road" },
+      { property: "og:description", content: "Premium camper vans for sale across the USA and Europe." },
       { property: "og:image", content: heroVan },
       { name: "twitter:image", content: heroVan },
     ],
@@ -163,11 +163,10 @@ function Nav() {
             <span className="text-foreground">CampVan</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-foreground/80">
-            <Link to="/rent" className="hover:text-foreground transition">Rent</Link>
-            <Link to="/buy" className="hover:text-foreground transition">Buy</Link>
+            <Link to="/buy" className="hover:text-foreground transition">Shop Vans</Link>
             <Link to="/destinations" className="hover:text-foreground transition">Destinations</Link>
             <Link to="/how-it-works" className="hover:text-foreground transition">How it works</Link>
-            <Link to="/list-your-van" className="hover:text-foreground transition">List your van</Link>
+            <Link to="/list-your-van" className="hover:text-foreground transition">Sell your van</Link>
           </nav>
           <div className="hidden md:flex items-center gap-2">
             <button className="px-4 py-2 text-sm font-semibold rounded-full hover:bg-white/40 transition">Sign in</button>
@@ -179,11 +178,10 @@ function Nav() {
         </div>
         {open && (
           <div className="md:hidden glass mt-2 rounded-3xl p-4 flex flex-col gap-2 text-sm font-medium">
-            <Link to="/rent" onClick={() => setOpen(false)}>Rent</Link>
-            <Link to="/buy" onClick={() => setOpen(false)}>Buy</Link>
+            <Link to="/buy" onClick={() => setOpen(false)}>Shop Vans</Link>
             <Link to="/destinations" onClick={() => setOpen(false)}>Destinations</Link>
             <Link to="/how-it-works" onClick={() => setOpen(false)}>How it works</Link>
-            <Link to="/list-your-van" onClick={() => setOpen(false)}>List your van</Link>
+            <Link to="/list-your-van" onClick={() => setOpen(false)}>Sell your van</Link>
             <button className="mt-2 px-4 py-2 rounded-full bg-foreground text-background">Get started</button>
           </div>
         )}
@@ -240,14 +238,14 @@ function Hero() {
               <span className="block gradient-text">Limits.</span>
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/90">
-              Rent or own hand-picked, premium camper vans across two continents — designed for the road less travelled.
+              Own hand-picked, premium camper vans across two continents — every listing inspected, financed, and delivered to your door.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#rent" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
-                Rent a Luxury Van <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#buy" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
-                Buy a Camper
+              <Link to="/buy" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+                Shop the marketplace <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href="#categories" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
+                Browse by style
               </a>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/90">
@@ -281,13 +279,9 @@ function Hero() {
                 <p className="truncate text-sm text-white/72">{active.location} · {active.specs.beds} beds · {active.specs.seats} seats · {active.specs.mpg}</p>
               </div>
               <div className="flex items-end gap-5 text-sm">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
-                  <p className="font-display text-2xl font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
-                </div>
-                <div className="hidden sm:block text-right">
+                <div className="text-right">
                   <p className="text-[10px] uppercase tracking-widest text-white/60">Own for</p>
-                  <p className="font-display text-lg font-bold text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
+                  <p className="font-display text-2xl font-black text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -335,10 +329,10 @@ function SearchBar() {
     <div className="relative animate-fade-up">
       <div className="glass rounded-3xl p-2 sm:p-3 shadow-elevated max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1.2fr_1.4fr_1fr_auto] gap-1">
-          <Field icon={<MapPin className="h-4 w-4" />} label="Pickup" placeholder="City or country" />
-          <Field icon={<MapPin className="h-4 w-4" />} label="Drop-off" placeholder="Same as pickup" />
-          <Field icon={<Calendar className="h-4 w-4" />} label="Dates" placeholder="Add dates" />
-          <Field icon={<Users className="h-4 w-4" />} label="Travelers" placeholder="2 adults" />
+          <Field icon={<MapPin className="h-4 w-4" />} label="Location" placeholder="City or country" />
+          <Field icon={<BedDouble className="h-4 w-4" />} label="Van type" placeholder="Any type" />
+          <Field icon={<Gauge className="h-4 w-4" />} label="Max price" placeholder="$150,000" />
+          <Field icon={<Calendar className="h-4 w-4" />} label="Year" placeholder="2020+" />
           <button className="flex items-center justify-center gap-2 rounded-2xl text-white font-semibold px-6 py-4 shadow-glow hover:opacity-95 transition" style={{ background: "var(--gradient-warm)" }}>
             <Search className="h-4 w-4" />
             <span>Search</span>
@@ -346,8 +340,8 @@ function SearchBar() {
         </div>
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/70">
-        <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Free cancellation</span>
-        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 average rating</span>
+        <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Buyer protection</span>
+        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 200-point inspection</span>
         <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 7 countries · 120+ cities</span>
       </div>
     </div>
@@ -370,7 +364,7 @@ function Field({ icon, label, placeholder }: { icon: React.ReactNode; label: str
 
 function Categories() {
   return (
-    <section id="rent" className="relative py-24 sm:py-32">
+    <section id="categories" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHead
           eyebrow="Browse by style"
@@ -402,20 +396,18 @@ function Categories() {
 
 function FeaturedVans() {
   return (
-    <section id="buy" className="relative py-24 sm:py-32" style={{ background: "var(--gradient-sand)" }}>
+    <section id="for-sale" className="relative py-24 sm:py-32" style={{ background: "var(--gradient-sand)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead
             eyebrow="Featured this week"
-            title="Hand-picked vans, ready to roam"
-            desc="Rent by the day, or own them outright with flexible financing."
+            title="Hand-picked vans, ready to own"
+            desc="Inspected, financed and delivered — your next camper is a click away."
             align="left"
           />
-          <div className="flex gap-2">
-            <Tab active>All</Tab>
-            <Tab>For rent</Tab>
-            <Tab>For sale</Tab>
-          </div>
+          <Link to="/buy" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold">
+            See all listings <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -424,7 +416,7 @@ function FeaturedVans() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={v.img} alt={v.name} width={1024} height={768} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                 <div className="absolute top-3 left-3 flex gap-2">
-                  <span className="glass-dark text-white text-xs font-semibold px-2.5 py-1 rounded-full">For rent · For sale</span>
+                  <span className="glass-dark text-white text-xs font-semibold px-2.5 py-1 rounded-full">For sale</span>
                 </div>
                 <button aria-label="Save" className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full glass-dark text-white">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -453,17 +445,17 @@ function FeaturedVans() {
 
                 <div className="mt-5 flex items-end justify-between gap-3 border-t border-border/60 pt-4">
                   <div>
-                    <p className="text-xs text-muted-foreground">From</p>
-                    <p className="font-display font-extrabold text-2xl text-foreground">${v.rent}<span className="text-sm font-semibold text-muted-foreground">/day</span></p>
+                    <p className="text-xs text-muted-foreground">Price</p>
+                    <p className="font-display font-extrabold text-2xl text-foreground">${v.sale.toLocaleString()}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-muted-foreground">Or buy for</p>
-                    <p className="font-display font-bold text-lg text-[var(--forest)]">${v.sale.toLocaleString()}</p>
+                    <p className="text-xs text-muted-foreground">Finance from</p>
+                    <p className="font-display font-bold text-lg text-[var(--forest)]">${Math.round(v.sale / 60).toLocaleString()}<span className="text-xs font-medium text-muted-foreground">/mo</span></p>
                   </div>
                 </div>
-                <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground text-background font-semibold py-3 hover:opacity-90 transition">
+                <Link to="/buy" className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground text-background font-semibold py-3 hover:opacity-90 transition">
                   View details <ArrowRight className="h-4 w-4" />
-                </button>
+                </Link>
               </div>
             </article>
           ))}
@@ -481,19 +473,11 @@ function Spec({ icon, children }: { icon: React.ReactNode; children: React.React
   );
 }
 
-function Tab({ children, active }: { children: React.ReactNode; active?: boolean }) {
-  return (
-    <button className={`px-4 py-2 rounded-full text-sm font-semibold transition ${active ? "bg-foreground text-background" : "bg-white/70 text-foreground/70 hover:text-foreground"}`}>
-      {children}
-    </button>
-  );
-}
-
 function HowItWorks() {
   const steps = [
-    { n: "01", title: "Search", desc: "Pick your dates, location and crew. Filter by features that matter to you." },
-    { n: "02", title: "Book or buy", desc: "Reserve in seconds with secure online payment, or finance your dream camper." },
-    { n: "03", title: "Hit the road", desc: "Pick up the keys, follow our AI trip planner, and start writing your story." },
+    { n: "01", title: "Browse", desc: "Filter inspected vans by style, location and budget. Save your favourites." },
+    { n: "02", title: "Reserve", desc: "Place a refundable deposit, secure your van and unlock financing pre-approval in 24 hours." },
+    { n: "03", title: "Drive away", desc: "We deliver to your door or arrange concierge pickup — keys in hand, road in front of you." },
   ];
   return (
     <section id="how" className="py-24 sm:py-32">
@@ -520,9 +504,9 @@ function Destinations() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sunset)]">Pickup locations</span>
-            <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl">Two continents.<br/>One endless road.</h2>
-            <p className="mt-4 text-white/75 text-lg">Pickup hubs across the US and Europe, with one-way rentals between most major cities.</p>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sunset)]">Delivery network</span>
+            <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl">Two continents.<br/>One handover address — yours.</h2>
+            <p className="mt-4 text-white/75 text-lg">Concierge delivery hubs across the US and Europe, with door-to-door shipping to most major cities.</p>
           </div>
           <div className="glass-dark rounded-3xl p-4 grid grid-cols-2 gap-2">
             <Stat k="3,500+" v="Vehicles" />
@@ -557,9 +541,9 @@ function Stat({ k, v }: { k: string; v: string }) {
 
 function Testimonials() {
   const items = [
-    { q: "Picked up in Munich, dropped off in Lisbon. The booking was effortless and the van was immaculate.", a: "Marta · Solo traveler" },
-    { q: "We bought a family motorhome through CampVan. Financing was simple and the team handled every detail.", a: "The Petersons · Colorado" },
-    { q: "Listed my Sprinter and booked 22 nights in the first month. Best decision I've made.", a: "Liam · Van owner, UK" },
+    { q: "Bought our Sprinter through CampVan and had it delivered to our driveway in 10 days. Flawless process.", a: "Marta · Solo traveler" },
+    { q: "We purchased a family motorhome through CampVan. Financing was simple and the team handled every detail.", a: "The Petersons · Colorado" },
+    { q: "Sold my Sprinter in three weeks at the price I wanted. The team handled the inspection and paperwork.", a: "Liam · Van seller, UK" },
   ];
   return (
     <section className="py-24 sm:py-32">
@@ -591,26 +575,26 @@ function CTA() {
           <div className="relative grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sand)]">Own a camper?</span>
-              <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl leading-tight">Turn your van into a road-trip business.</h2>
-              <p className="mt-4 text-white/85 text-lg max-w-xl">List your vehicle in minutes. Set your prices, your rules, and earn an average of $1,800/month.</p>
+              <h2 className="mt-3 font-display font-black text-4xl sm:text-5xl leading-tight">Sell your van for the price it deserves.</h2>
+              <p className="mt-4 text-white/85 text-lg max-w-xl">List your camper in minutes. Our team handles inspection, photography and paperwork — most vans sell within 3 weeks.</p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <a href="#" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
-                  List your vehicle <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href="#" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
+                <Link to="/list-your-van" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--sunset)] text-white font-semibold shadow-glow hover:-translate-y-0.5 transition">
+                  Sell your van <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link to="/how-it-works" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/25 transition">
                   Learn more
-                </a>
+                </Link>
               </div>
             </div>
             <div className="glass rounded-3xl p-6 text-foreground">
-              <p className="text-sm text-foreground/70">Estimated monthly earnings</p>
-              <p className="font-display font-black text-5xl mt-1">$1,840</p>
+              <p className="text-sm text-foreground/70">Average selling price</p>
+              <p className="font-display font-black text-5xl mt-1">$84,500</p>
               <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-                <Mini k="22" v="nights" />
-                <Mini k="4.9★" v="rating" />
-                <Mini k="0%" v="setup fee" />
+                <Mini k="21 days" v="to sell" />
+                <Mini k="4.9★" v="seller rating" />
+                <Mini k="0%" v="listing fee" />
               </div>
-              <p className="text-xs text-foreground/60 mt-4">Based on a Sprinter-class van listed in California, last 12 months.</p>
+              <p className="text-xs text-foreground/60 mt-4">Based on Sprinter-class vans sold through CampVan, last 12 months.</p>
             </div>
           </div>
         </div>
@@ -639,7 +623,7 @@ function Footer() {
             </span>
             CampVan
           </div>
-          <p className="mt-4 max-w-sm text-sm">The leading marketplace for camper van rentals and sales across the USA and Europe.</p>
+          <p className="mt-4 max-w-sm text-sm">The premium marketplace for buying camper vans, RVs and motorhomes across the USA and Europe.</p>
           <div className="mt-5 flex gap-2">
             <select className="bg-white/10 border border-white/15 rounded-full px-3 py-2 text-sm">
               <option>English</option><option>Deutsch</option><option>Français</option><option>Italiano</option><option>Español</option>
@@ -649,8 +633,8 @@ function Footer() {
             </select>
           </div>
         </div>
-        <FooterCol title="Rent" links={["Camper Vans", "RVs", "Luxury", "Family", "Off-road"]} />
-        <FooterCol title="Buy" links={["Marketplace", "Financing", "Inspections", "Sell my van"]} />
+        <FooterCol title="Shop" links={["Camper Vans", "RVs", "Luxury", "Family", "Off-road"]} />
+        <FooterCol title="Services" links={["Financing", "Inspections", "Delivery", "Warranty"]} />
         <FooterCol title="Company" links={["About", "Blog", "Careers", "Press", "Contact"]} />
       </div>
       <div className="border-t border-white/10">

@@ -1,17 +1,14 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type CartMode = "rent" | "buy";
 export type CartItem = {
-  id: string; // `${slug}__${idx}__${mode}`
+  id: string; // `${slug}__${idx}`
   slug: string;
   idx: number;
   name: string;
   img: string;
   location: string;
-  mode: CartMode;
-  price: number; // per day if rent, total if buy
-  days?: number; // rent only
-  qty: number; // buy only
+  price: number; // sale price
+  qty: number;
 };
 
 type CartCtx = {
@@ -25,7 +22,7 @@ type CartCtx = {
 };
 
 const Ctx = createContext<CartCtx | null>(null);
-const KEY = "campvan_cart_v1";
+const KEY = "campvan_cart_v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -44,19 +41,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items]);
 
   const add: CartCtx["add"] = (i) => {
-    const id = `${i.slug}__${i.idx}__${i.mode}`;
+    const id = `${i.slug}__${i.idx}`;
     setItems((prev) => {
       const exists = prev.find((p) => p.id === id);
       if (exists) {
-        return prev.map((p) =>
-          p.id === id
-            ? {
-                ...p,
-                qty: i.mode === "buy" ? p.qty + i.qty : p.qty,
-                days: i.mode === "rent" ? (p.days ?? 1) + (i.days ?? 1) : p.days,
-              }
-            : p,
-        );
+        return prev.map((p) => (p.id === id ? { ...p, qty: p.qty + i.qty } : p));
       }
       return [...prev, { ...i, id }];
     });
@@ -66,11 +55,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((p) => p.map((x) => (x.id === id ? { ...x, ...patch } : x)));
   const clear = () => setItems([]);
 
-  const count = items.reduce((n, i) => n + (i.mode === "buy" ? i.qty : 1), 0);
-  const subtotal = items.reduce(
-    (sum, i) => sum + (i.mode === "rent" ? i.price * (i.days ?? 1) : i.price * i.qty),
-    0,
-  );
+  const count = items.reduce((n, i) => n + i.qty, 0);
+  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
 
   return <Ctx.Provider value={{ items, add, remove, update, clear, count, subtotal }}>{children}</Ctx.Provider>;
 }

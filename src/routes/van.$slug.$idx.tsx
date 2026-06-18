@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Calendar, Check } from "lucide-react";
+import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
 import { getVan, type Van } from "@/lib/categories";
 import { useCart } from "@/lib/cart";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/van/$slug/$idx")({
     meta: loaderData
       ? [
           { title: `${loaderData.van.name} — CampVan` },
-          { name: "description", content: `${loaderData.van.name} in ${loaderData.van.location}. Rent from $${loaderData.van.rent}/day or buy from $${loaderData.van.sale.toLocaleString()}.` },
+          { name: "description", content: `${loaderData.van.name} for sale in ${loaderData.van.location}. Buy from $${loaderData.van.sale.toLocaleString()}.` },
           { property: "og:title", content: `${loaderData.van.name} — CampVan` },
           { property: "og:image", content: loaderData.van.img },
           { name: "twitter:image", content: loaderData.van.img },
@@ -44,11 +44,10 @@ function VanPage() {
   const { van, category, idx } = Route.useLoaderData();
   const { add } = useCart();
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"rent" | "buy">("rent");
-  const [days, setDays] = useState(5);
   const [added, setAdded] = useState(false);
 
   const related: Van[] = category.vans.filter((_v: Van, i: number) => i !== idx).slice(0, 3);
+  const monthly = Math.round(van.sale / 60);
 
   function handleAdd(go?: boolean) {
     add({
@@ -57,10 +56,8 @@ function VanPage() {
       name: van.name,
       img: van.img,
       location: van.location,
-      mode,
-      price: mode === "rent" ? van.rent : van.sale,
-      days: mode === "rent" ? days : undefined,
-      qty: mode === "buy" ? 1 : 1,
+      price: van.sale,
+      qty: 1,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
@@ -105,49 +102,16 @@ function VanPage() {
               </div>
 
               <div className="mt-6 rounded-3xl border border-black/5 bg-white p-5 shadow-soft">
-                <div className="inline-flex rounded-full bg-foreground/5 p-1 text-sm font-semibold">
-                  <button
-                    onClick={() => setMode("rent")}
-                    className={`px-4 py-1.5 rounded-full transition ${mode === "rent" ? "bg-foreground text-background" : "text-foreground/70"}`}
-                  >
-                    Rent
-                  </button>
-                  <button
-                    onClick={() => setMode("buy")}
-                    className={`px-4 py-1.5 rounded-full transition ${mode === "buy" ? "bg-foreground text-background" : "text-foreground/70"}`}
-                  >
-                    Buy
-                  </button>
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[var(--forest)]/10 text-[var(--forest)] text-[10px] font-bold uppercase tracking-wider">
+                  For sale
+                </span>
+                <div className="mt-3 flex items-baseline gap-2">
+                  <span className="font-display font-black text-4xl">${van.sale.toLocaleString()}</span>
                 </div>
-
-                {mode === "rent" ? (
-                  <div className="mt-4">
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-display font-black text-3xl">${van.rent}</span>
-                      <span className="text-sm text-foreground/60">/day</span>
-                    </div>
-                    <label className="mt-4 block text-xs font-semibold uppercase tracking-wider text-foreground/60">Days</label>
-                    <div className="mt-2 flex items-center gap-3">
-                      <button onClick={() => setDays(Math.max(1, days - 1))} className="h-9 w-9 rounded-full bg-foreground/5 font-bold">−</button>
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 font-semibold">
-                        <Calendar className="h-4 w-4" /> {days} {days === 1 ? "day" : "days"}
-                      </div>
-                      <button onClick={() => setDays(days + 1)} className="h-9 w-9 rounded-full bg-foreground/5 font-bold">+</button>
-                    </div>
-                    <div className="mt-4 flex items-center justify-between text-sm">
-                      <span className="text-foreground/60">Total</span>
-                      <span className="font-display font-black text-xl">${(van.rent * days).toLocaleString()}</span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mt-4">
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-display font-black text-3xl">${van.sale.toLocaleString()}</span>
-                      <span className="text-sm text-foreground/60">one-time</span>
-                    </div>
-                    <p className="mt-3 text-sm text-foreground/70">Includes 12-month mechanical warranty and free delivery within 200 miles.</p>
-                  </div>
-                )}
+                <p className="mt-2 text-sm text-foreground/70">
+                  Or finance from <span className="font-semibold text-foreground">${monthly.toLocaleString()}/mo</span> over 60 months.
+                </p>
+                <p className="mt-3 text-sm text-foreground/70">Includes 12-month mechanical warranty, 200-point inspection and free delivery within 200 miles.</p>
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <button
@@ -160,12 +124,12 @@ function VanPage() {
                     onClick={() => handleAdd(true)}
                     className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition"
                   >
-                    {mode === "rent" ? "Book now" : "Buy now"}
+                    Buy now
                   </button>
                 </div>
 
                 <p className="mt-4 inline-flex items-center gap-2 text-xs text-foreground/60">
-                  <ShieldCheck className="h-3.5 w-3.5 text-[var(--forest)]" /> Free cancellation up to 48h before pickup
+                  <ShieldCheck className="h-3.5 w-3.5 text-[var(--forest)]" /> 7-day money-back guarantee
                 </p>
               </div>
             </div>
@@ -174,8 +138,8 @@ function VanPage() {
           <section className="mt-16">
             <h2 className="font-display font-black text-2xl">About this {category.name.slice(0, -1).toLowerCase()}</h2>
             <p className="mt-4 max-w-3xl text-foreground/75 leading-relaxed">
-              {van.name} is parked in {van.location} and ready for your next adventure. Verified by CampVan with a full pre-trip
-              inspection, 24/7 roadside assistance and a flexible cancellation policy. {category.description}
+              {van.name} is located in {van.location} and ready for handover. Every van sold through CampVan comes with a
+              full 200-point inspection, verified service history, title check and 12-month mechanical warranty. {category.description}
             </p>
           </section>
 
@@ -198,7 +162,7 @@ function VanPage() {
                       <div className="p-5">
                         <h3 className="font-display font-bold text-base leading-tight">{r.name}</h3>
                         <p className="mt-1 text-xs text-foreground/60 inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> {r.location}</p>
-                        <div className="mt-3 font-display font-black text-lg">${r.rent}<span className="text-xs font-medium text-foreground/60">/day</span></div>
+                        <div className="mt-3 font-display font-black text-lg">${r.sale.toLocaleString()}</div>
                       </div>
                     </Link>
                   );
