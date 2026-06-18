@@ -238,14 +238,14 @@ function Hero() {
               <span className="block gradient-text">Limits.</span>
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/90">
-              Rent or own hand-picked, premium camper vans across two continents — designed for the road less travelled.
+              Own hand-picked, premium camper vans across two continents — every listing inspected, financed, and delivered to your door.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#rent" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
-                Rent a Luxury Van <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#buy" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
-                Buy a Camper
+              <Link to="/buy" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+                Shop the marketplace <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href="#categories" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
+                Browse by style
               </a>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/90">
