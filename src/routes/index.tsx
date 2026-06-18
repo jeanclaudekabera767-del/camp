@@ -483,9 +483,9 @@ function Tab({ children, active }: { children: React.ReactNode; active?: boolean
 
 function HowItWorks() {
   const steps = [
-    { n: "01", title: "Search", desc: "Pick your dates, location and crew. Filter by features that matter to you." },
-    { n: "02", title: "Book or buy", desc: "Reserve in seconds with secure online payment, or finance your dream camper." },
-    { n: "03", title: "Hit the road", desc: "Pick up the keys, follow our AI trip planner, and start writing your story." },
+    { n: "01", title: "Browse", desc: "Filter inspected vans by style, location and budget. Save your favourites." },
+    { n: "02", title: "Reserve", desc: "Place a refundable deposit, secure your van and unlock financing pre-approval in 24 hours." },
+    { n: "03", title: "Drive away", desc: "We deliver to your door or arrange concierge pickup — keys in hand, road in front of you." },
   ];
   return (
     <section id="how" className="py-24 sm:py-32">
