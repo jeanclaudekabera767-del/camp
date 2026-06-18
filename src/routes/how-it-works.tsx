@@ -4,16 +4,16 @@ import { Search, Calendar, MapPin, ShieldCheck, Sparkles, Star } from "lucide-re
 import heroHow from "@/assets/hero-lux-1.jpg";
 
 const steps = [
-  { icon: Search, title: "1. Search & compare", desc: "Filter by dates, location, sleeps, and amenities. Every van comes with a verified host." },
-  { icon: Calendar, title: "2. Book in minutes", desc: "Instant confirmation, transparent pricing, and free 24-hour cancellation." },
-  { icon: MapPin, title: "3. Pick up & roam", desc: "Meet your host, get the keys, hit the road. Roadside support included." },
+  { icon: Search, title: "1. Browse the marketplace", desc: "Filter by van type, location, year and budget. Every listing is inspected and verified." },
+  { icon: Calendar, title: "2. Reserve & finance", desc: "Place a refundable deposit, get financing pre-approval in 24 hours and lock in your price." },
+  { icon: MapPin, title: "3. Delivery & drive away", desc: "Doorstep delivery or concierge pickup. Keys in hand with a 12-month warranty." },
 ];
 
 const faqs = [
   { q: "Do I need a special license?", a: "For most vans, a standard driver's license is all you need. Larger Class A motorhomes may require additional endorsements depending on your country." },
-  { q: "Is insurance included?", a: "Yes — every rental includes comprehensive insurance and 24/7 roadside assistance." },
-  { q: "Can I take a van across borders?", a: "Many of our European hosts allow cross-border travel. Check the listing or message the host directly." },
-  { q: "What if I want to buy instead of rent?", a: "Browse our marketplace — every listing is inspected and financing is available." },
+  { q: "Is the van inspected before I buy?", a: "Yes — every van sold through CampVan passes a 200-point inspection with verified service history and title check." },
+  { q: "Do you offer financing?", a: "Yes. We partner with leading lenders to offer pre-approval in under 24 hours, with terms up to 84 months." },
+  { q: "Is there a return guarantee?", a: "Every purchase includes a 7-day money-back guarantee and a 12-month mechanical warranty." },
 ];
 
 export const Route = createFileRoute("/how-it-works")({
