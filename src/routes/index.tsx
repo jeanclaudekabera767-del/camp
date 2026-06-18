@@ -86,10 +86,10 @@ const luxuryFleet = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CampVan — Rent or Buy Camper Vans across USA & Europe" },
-      { name: "description", content: "Discover the freedom of the open road. Rent or buy premium camper vans, RVs and motorhomes across the USA and Europe." },
-      { property: "og:title", content: "CampVan — Explore Without Limits" },
-      { property: "og:description", content: "Premium camper van rentals and sales across the USA and Europe." },
+      { title: "CampVan — Buy Premium Camper Vans across USA & Europe" },
+      { name: "description", content: "Shop a curated marketplace of inspected camper vans, RVs, and motorhomes for sale across the USA and Europe." },
+      { property: "og:title", content: "CampVan — Own the Open Road" },
+      { property: "og:description", content: "Premium camper vans for sale across the USA and Europe." },
       { property: "og:image", content: heroVan },
       { name: "twitter:image", content: heroVan },
     ],
