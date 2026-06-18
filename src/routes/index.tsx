@@ -631,7 +631,7 @@ function Footer() {
             </span>
             CampVan
           </div>
-          <p className="mt-4 max-w-sm text-sm">The leading marketplace for camper van rentals and sales across the USA and Europe.</p>
+          <p className="mt-4 max-w-sm text-sm">The premium marketplace for buying camper vans, RVs and motorhomes across the USA and Europe.</p>
           <div className="mt-5 flex gap-2">
             <select className="bg-white/10 border border-white/15 rounded-full px-3 py-2 text-sm">
               <option>English</option><option>Deutsch</option><option>Français</option><option>Italiano</option><option>Español</option>
@@ -641,8 +641,8 @@ function Footer() {
             </select>
           </div>
         </div>
-        <FooterCol title="Rent" links={["Camper Vans", "RVs", "Luxury", "Family", "Off-road"]} />
-        <FooterCol title="Buy" links={["Marketplace", "Financing", "Inspections", "Sell my van"]} />
+        <FooterCol title="Shop" links={["Camper Vans", "RVs", "Luxury", "Family", "Off-road"]} />
+        <FooterCol title="Services" links={["Financing", "Inspections", "Delivery", "Warranty"]} />
         <FooterCol title="Company" links={["About", "Blog", "Careers", "Press", "Contact"]} />
       </div>
       <div className="border-t border-white/10">
