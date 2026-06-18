@@ -42,7 +42,7 @@ function DestinationsPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {places.map((p) => (
-            <Link key={p.region} to="/rent" className="group relative overflow-hidden rounded-3xl shadow-soft aspect-[4/5]">
+            <Link key={p.region} to="/buy" className="group relative overflow-hidden rounded-3xl shadow-soft aspect-[4/5]">
               <img src={p.img} alt={p.region} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">

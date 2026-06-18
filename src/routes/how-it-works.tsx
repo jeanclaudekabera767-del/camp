@@ -80,7 +80,7 @@ function HowPage() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Link to="/rent" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition">
+          <Link to="/buy" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition">
             Start exploring vans
           </Link>
         </div>
