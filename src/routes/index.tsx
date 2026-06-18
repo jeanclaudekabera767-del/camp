@@ -279,13 +279,9 @@ function Hero() {
                 <p className="truncate text-sm text-white/72">{active.location} · {active.specs.beds} beds · {active.specs.seats} seats · {active.specs.mpg}</p>
               </div>
               <div className="flex items-end gap-5 text-sm">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Rent from</p>
-                  <p className="font-display text-2xl font-black">${active.rent}<span className="text-sm font-semibold text-white/70">/day</span></p>
-                </div>
-                <div className="hidden sm:block text-right">
+                <div className="text-right">
                   <p className="text-[10px] uppercase tracking-widest text-white/60">Own for</p>
-                  <p className="font-display text-lg font-bold text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
+                  <p className="font-display text-2xl font-black text-[var(--sunset)]">${active.sale.toLocaleString()}</p>
                 </div>
               </div>
             </div>
