@@ -329,10 +329,10 @@ function SearchBar() {
     <div className="relative animate-fade-up">
       <div className="glass rounded-3xl p-2 sm:p-3 shadow-elevated max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1.2fr_1.4fr_1fr_auto] gap-1">
-          <Field icon={<MapPin className="h-4 w-4" />} label="Pickup" placeholder="City or country" />
-          <Field icon={<MapPin className="h-4 w-4" />} label="Drop-off" placeholder="Same as pickup" />
-          <Field icon={<Calendar className="h-4 w-4" />} label="Dates" placeholder="Add dates" />
-          <Field icon={<Users className="h-4 w-4" />} label="Travelers" placeholder="2 adults" />
+          <Field icon={<MapPin className="h-4 w-4" />} label="Location" placeholder="City or country" />
+          <Field icon={<BedDouble className="h-4 w-4" />} label="Van type" placeholder="Any type" />
+          <Field icon={<Gauge className="h-4 w-4" />} label="Max price" placeholder="$150,000" />
+          <Field icon={<Calendar className="h-4 w-4" />} label="Year" placeholder="2020+" />
           <button className="flex items-center justify-center gap-2 rounded-2xl text-white font-semibold px-6 py-4 shadow-glow hover:opacity-95 transition" style={{ background: "var(--gradient-warm)" }}>
             <Search className="h-4 w-4" />
             <span>Search</span>
@@ -340,8 +340,8 @@ function SearchBar() {
         </div>
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/70">
-        <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Free cancellation</span>
-        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 4.9 average rating</span>
+        <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Buyer protection</span>
+        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> 200-point inspection</span>
         <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 7 countries · 120+ cities</span>
       </div>
     </div>
