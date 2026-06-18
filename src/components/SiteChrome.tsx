@@ -4,11 +4,10 @@ import { useState, type ReactNode } from "react";
 import { useCart } from "@/lib/cart";
 
 const navLinks = [
-  { to: "/rent", label: "Rent" },
-  { to: "/buy", label: "Buy" },
+  { to: "/buy", label: "Shop Vans" },
   { to: "/destinations", label: "Destinations" },
   { to: "/how-it-works", label: "How it works" },
-  { to: "/list-your-van", label: "List your van" },
+  { to: "/list-your-van", label: "Sell your van" },
 ] as const;
 
 export function SiteNav() {
