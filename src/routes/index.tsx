@@ -364,7 +364,7 @@ function Field({ icon, label, placeholder }: { icon: React.ReactNode; label: str
 
 function Categories() {
   return (
-    <section id="rent" className="relative py-24 sm:py-32">
+    <section id="categories" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHead
           eyebrow="Browse by style"
