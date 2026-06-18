@@ -20,9 +20,9 @@ export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
       { title: "How it Works — CampVan" },
-      { name: "description", content: "Booking a camper van takes three simple steps. Here's how CampVan works for renters and buyers." },
+      { name: "description", content: "Buying a camper van takes three simple steps. Here's how CampVan delivers an inspected, financed van to your door." },
       { property: "og:title", content: "How it Works — CampVan" },
-      { property: "og:description", content: "Search, book, and hit the road in minutes." },
+      { property: "og:description", content: "Browse, reserve, drive away — with delivery, financing and warranty included." },
       { property: "og:image", content: heroHow },
     ],
   }),
