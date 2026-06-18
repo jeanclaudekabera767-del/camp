@@ -80,10 +80,10 @@ export function SiteFooter() {
             </span>
             CampVan
           </div>
-          <p className="mt-4 max-w-sm text-sm">The leading marketplace for camper van rentals and sales across the USA and Europe.</p>
+          <p className="mt-4 max-w-sm text-sm">The premium marketplace for buying camper vans, RVs, and motorhomes across the USA and Europe.</p>
         </div>
-        <FooterCol title="Explore" items={[{ to: "/rent", label: "Rent" }, { to: "/buy", label: "Buy" }, { to: "/destinations", label: "Destinations" }]} />
-        <FooterCol title="Owners" items={[{ to: "/list-your-van", label: "List your van" }, { to: "/how-it-works", label: "How it works" }]} />
+        <FooterCol title="Shop" items={[{ to: "/buy", label: "Marketplace" }, { to: "/destinations", label: "Destinations" }]} />
+        <FooterCol title="Sellers" items={[{ to: "/list-your-van", label: "Sell your van" }, { to: "/how-it-works", label: "How it works" }]} />
         <FooterCol title="Company" items={[{ to: "/", label: "Home" }]} />
       </div>
       <div className="border-t border-white/10">
