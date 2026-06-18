@@ -7,7 +7,7 @@ export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Your cart — CampVan" },
-      { name: "description", content: "Review and check out your camper van rentals and purchases." },
+      { name: "description", content: "Review and check out your camper van purchases." },
     ],
   }),
   component: CartPage,
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items, remove, update, subtotal, clear } = useCart();
-  const fees = items.length > 0 ? 49 : 0;
+  const fees = items.length > 0 ? 499 : 0;
   const total = subtotal + fees;
 
   return (
@@ -41,16 +41,16 @@ function CartPage() {
                 <ShoppingCart className="h-7 w-7 text-foreground/50" />
               </div>
               <h2 className="mt-5 font-display font-bold text-2xl">Your cart is empty</h2>
-              <p className="mt-2 text-foreground/60">Browse the fleet and add a van to get rolling.</p>
-              <Link to="/rent" className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background font-semibold">
-                Explore vans <ArrowRight className="h-4 w-4" />
+              <p className="mt-2 text-foreground/60">Browse the marketplace and find your dream camper.</p>
+              <Link to="/buy" className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background font-semibold">
+                Shop vans <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           ) : (
             <div className="mt-10 grid lg:grid-cols-[1.5fr_1fr] gap-8">
               <ul className="space-y-4">
                 {items.map((i) => {
-                  const line = i.mode === "rent" ? i.price * (i.days ?? 1) : i.price * i.qty;
+                  const line = i.price * i.qty;
                   return (
                     <li key={i.id} className="flex gap-4 p-4 rounded-3xl bg-white border border-black/5 shadow-soft">
                       <Link
@@ -64,7 +64,7 @@ function CartPage() {
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
                             <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[var(--forest)]/10 text-[var(--forest)]">
-                              {i.mode === "rent" ? "Rental" : "Purchase"}
+                              Purchase
                             </span>
                             <h3 className="mt-1 font-display font-bold text-base sm:text-lg truncate">{i.name}</h3>
                             <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-foreground/60">
@@ -76,34 +76,18 @@ function CartPage() {
                           </button>
                         </div>
                         <div className="mt-3 flex items-end justify-between gap-3 flex-wrap">
-                          {i.mode === "rent" ? (
-                            <div className="inline-flex items-center gap-2 text-sm">
-                              <span className="text-foreground/60">Days:</span>
-                              <button
-                                onClick={() => update(i.id, { days: Math.max(1, (i.days ?? 1) - 1) })}
-                                className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
-                              >−</button>
-                              <span className="font-semibold w-6 text-center">{i.days}</span>
-                              <button
-                                onClick={() => update(i.id, { days: (i.days ?? 1) + 1 })}
-                                className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
-                              >+</button>
-                              <span className="ml-2 text-xs text-foreground/60">@ ${i.price}/day</span>
-                            </div>
-                          ) : (
-                            <div className="inline-flex items-center gap-2 text-sm">
-                              <span className="text-foreground/60">Qty:</span>
-                              <button
-                                onClick={() => update(i.id, { qty: Math.max(1, i.qty - 1) })}
-                                className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
-                              >−</button>
-                              <span className="font-semibold w-6 text-center">{i.qty}</span>
-                              <button
-                                onClick={() => update(i.id, { qty: i.qty + 1 })}
-                                className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
-                              >+</button>
-                            </div>
-                          )}
+                          <div className="inline-flex items-center gap-2 text-sm">
+                            <span className="text-foreground/60">Qty:</span>
+                            <button
+                              onClick={() => update(i.id, { qty: Math.max(1, i.qty - 1) })}
+                              className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
+                            >−</button>
+                            <span className="font-semibold w-6 text-center">{i.qty}</span>
+                            <button
+                              onClick={() => update(i.id, { qty: i.qty + 1 })}
+                              className="h-7 w-7 rounded-full bg-foreground/5 font-bold"
+                            >+</button>
+                          </div>
                           <div className="font-display font-black text-lg">${line.toLocaleString()}</div>
                         </div>
                       </div>
@@ -116,7 +100,7 @@ function CartPage() {
                 <h2 className="font-display font-black text-xl">Order summary</h2>
                 <dl className="mt-5 space-y-2 text-sm">
                   <div className="flex justify-between"><dt className="text-foreground/70">Subtotal</dt><dd className="font-semibold">${subtotal.toLocaleString()}</dd></div>
-                  <div className="flex justify-between"><dt className="text-foreground/70">Service & insurance</dt><dd className="font-semibold">${fees}</dd></div>
+                  <div className="flex justify-between"><dt className="text-foreground/70">Delivery & inspection</dt><dd className="font-semibold">${fees}</dd></div>
                   <div className="flex justify-between pt-3 border-t border-black/5">
                     <dt className="font-display font-black">Total</dt>
                     <dd className="font-display font-black text-xl">${total.toLocaleString()}</dd>
@@ -126,7 +110,7 @@ function CartPage() {
                   Checkout <ArrowRight className="h-4 w-4" />
                 </button>
                 <p className="mt-3 inline-flex items-center gap-2 text-xs text-foreground/60">
-                  <ShieldCheck className="h-3.5 w-3.5 text-[var(--forest)]" /> Secure payment · Free cancellation up to 48h
+                  <ShieldCheck className="h-3.5 w-3.5 text-[var(--forest)]" /> Secure payment · 7-day money-back guarantee
                 </p>
               </aside>
             </div>
