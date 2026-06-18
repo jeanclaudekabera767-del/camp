@@ -2,26 +2,34 @@ import heroLux1 from "@/assets/van/van-new-1.jpg";
 import heroLux2 from "@/assets/van/van-new-2.jpg";
 import heroLux3 from "@/assets/van/van-new-3.jpg";
 import heroLux4 from "@/assets/van/van-new-4.jpg";
-import intLux1 from "@/assets/van/van-new-5.jpg";
-import intLux2 from "@/assets/van/van-new-6.jpg";
-import intLux3 from "@/assets/van/van-new-7.jpg";
-import intLux4 from "@/assets/van/van-new-8.jpg";
-import extLux1 from "@/assets/van/van-new-9.jpg";
-import extLux2 from "@/assets/van/van-new-10.jpg";
-import extLux3 from "@/assets/van/van-new-11.jpg";
-import extOff1 from "@/assets/van/van-new-12.jpg";
-import extFam1 from "@/assets/van/van-new-13.jpg";
-import extRv1 from "@/assets/van/van-new-14.jpg";
-import extBudget1 from "@/assets/van/van-new-15.jpg";
-import extVan1 from "@/assets/van/van-new-16.jpg";
-import van1 from "@/assets/van/van-new-17.jpg";
-import van2 from "@/assets/van/van-new-18.jpg";
-import van3 from "@/assets/van/van-new-19.jpg";
-import catVan from "@/assets/van/van-new-20.jpg";
-import catRv from "@/assets/van/van-new-21.jpg";
-import catFamily from "@/assets/van/van-new-22.jpg";
-import catOffroad from "@/assets/van/van-new-23.jpg";
-import catBudget from "@/assets/van/van-new-24.jpg";
+import heroLux5 from "@/assets/van/van-new-5.jpg";
+import heroLux6 from "@/assets/van/van-new-6.jpg";
+import heroLux7 from "@/assets/van/van-new-7.jpg";
+import heroLux8 from "@/assets/van/van-new-8.jpg";
+import heroLux9 from "@/assets/van/van-new-9.jpg";
+import heroLux10 from "@/assets/van/van-new-10.jpg";
+import heroLux11 from "@/assets/van/van-new-11.jpg";
+import heroLux12 from "@/assets/van/van-new-12.jpg";
+import intLux1 from "@/assets/van/van-new-13.jpg";
+import intLux2 from "@/assets/van/van-new-14.jpg";
+import intLux3 from "@/assets/van/van-new-15.jpg";
+import intLux4 from "@/assets/van/van-new-16.jpg";
+import extLux1 from "@/assets/van/van-new-17.jpg";
+import extLux2 from "@/assets/van/van-new-18.jpg";
+import extLux3 from "@/assets/van/van-new-19.jpg";
+import extOff1 from "@/assets/van/van-new-20.jpg";
+import extFam1 from "@/assets/van/van-new-21.jpg";
+import extRv1 from "@/assets/van/van-new-22.jpg";
+import extBudget1 from "@/assets/van/van-new-23.jpg";
+import extVan1 from "@/assets/van/van-new-24.jpg";
+import van1 from "@/assets/van/van-new-25.jpg";
+import van2 from "@/assets/van/van-new-26.jpg";
+import van3 from "@/assets/van/van-new-27.jpg";
+import catVan from "@/assets/van/van-new-28.jpg";
+import catRv from "@/assets/van/van-new-29.jpg";
+import catFamily from "@/assets/van/van-new-30.jpg";
+import catOffroad from "@/assets/van/van-new-31.jpg";
+import catBudget from "@/assets/van/van-new-32.jpg";
 
 export type Van = {
   img: string;
@@ -53,10 +61,14 @@ const luxuryVans: Van[] = [
   { img: heroLux2, name: "Alpine Summit 4×4 Pop-Top", location: "Chamonix, France", rent: 329, sale: 42000, beds: 4, seats: 4, fuel: "Diesel", rating: 4.95, reviews: 98, badge: "Overland" },
   { img: heroLux3, name: "Canyon Silver Voyager", location: "Moab, Utah", rent: 279, sale: 44900, beds: 2, seats: 4, fuel: "Diesel", rating: 4.92, reviews: 76 },
   { img: heroLux4, name: "Camper Lakeside Skyview", location: "Bavière, Allemagne", rent: 259, sale: 39000, beds: 2, seats: 4, fuel: "Diesel", rating: 4.97, reviews: 88, badge: "Toit Verre" },
-  { img: extLux1, name: "Amalfi Black Pearl", location: "Côte Amalfitaine, Italie", rent: 349, sale: 56000, beds: 2, seats: 4, fuel: "Diesel", rating: 4.96, reviews: 64 },
-  { img: extLux2, name: "Tuscany White Voyager", location: "Toscane, Italie", rent: 299, sale: 48000, beds: 4, seats: 4, fuel: "Diesel", rating: 4.93, reviews: 51 },
-  { img: extLux3, name: "Suite Airstream Joshua Tree", location: "Joshua Tree, CA", rent: 319, sale: 49500, beds: 4, seats: 5, fuel: "Diesel", rating: 4.94, reviews: 73, badge: "Iconique" },
-  { img: van1, name: "Sprinter Summit 4×4", location: "Denver, Colorado", rent: 229, sale: 38500, beds: 2, seats: 4, fuel: "Diesel", rating: 4.92, reviews: 128 },
+  { img: heroLux5, name: "Amalfi Black Pearl", location: "Côte Amalfitaine, Italie", rent: 349, sale: 56000, beds: 2, seats: 4, fuel: "Diesel", rating: 4.96, reviews: 64 },
+  { img: heroLux6, name: "Tuscany White Voyager", location: "Toscane, Italie", rent: 299, sale: 48000, beds: 4, seats: 4, fuel: "Diesel", rating: 4.93, reviews: 51 },
+  { img: heroLux7, name: "Suite Airstream Joshua Tree", location: "Joshua Tree, CA", rent: 319, sale: 49500, beds: 4, seats: 5, fuel: "Diesel", rating: 4.94, reviews: 73, badge: "Iconique" },
+  { img: heroLux8, name: "Sprinter Summit 4×4", location: "Denver, Colorado", rent: 229, sale: 38500, beds: 2, seats: 4, fuel: "Diesel", rating: 4.92, reviews: 128 },
+  { img: heroLux9, name: "Côte d'Azur Luxury", location: "Nice, France", rent: 369, sale: 61000, beds: 2, seats: 4, fuel: "Diesel", rating: 4.95, reviews: 91 },
+  { img: heroLux10, name: "Swiss Alpine Explorer", location: "Zermatt, Suisse", rent: 339, sale: 54000, beds: 3, seats: 5, fuel: "Diesel", rating: 4.94, reviews: 78 },
+  { img: heroLux11, name: "Bavarian Forest Suite", location: "Munich, Allemagne", rent: 309, sale: 47000, beds: 4, seats: 5, fuel: "Diesel", rating: 4.91, reviews: 65 },
+  { img: heroLux12, name: "Portofino Coastal Dream", location: "Portofino, Italie", rent: 399, sale: 72000, beds: 2, seats: 4, fuel: "Diesel", rating: 4.99, reviews: 156, badge: "Édition Limitée" },
 ];
 
 export const categories: Record<string, CategoryData> = {
