@@ -396,20 +396,18 @@ function Categories() {
 
 function FeaturedVans() {
   return (
-    <section id="buy" className="relative py-24 sm:py-32" style={{ background: "var(--gradient-sand)" }}>
+    <section id="for-sale" className="relative py-24 sm:py-32" style={{ background: "var(--gradient-sand)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead
             eyebrow="Featured this week"
-            title="Hand-picked vans, ready to roam"
-            desc="Rent by the day, or own them outright with flexible financing."
+            title="Hand-picked vans, ready to own"
+            desc="Inspected, financed and delivered — your next camper is a click away."
             align="left"
           />
-          <div className="flex gap-2">
-            <Tab active>All</Tab>
-            <Tab>For rent</Tab>
-            <Tab>For sale</Tab>
-          </div>
+          <Link to="/buy" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold">
+            See all listings <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -418,7 +416,7 @@ function FeaturedVans() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={v.img} alt={v.name} width={1024} height={768} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                 <div className="absolute top-3 left-3 flex gap-2">
-                  <span className="glass-dark text-white text-xs font-semibold px-2.5 py-1 rounded-full">For rent · For sale</span>
+                  <span className="glass-dark text-white text-xs font-semibold px-2.5 py-1 rounded-full">For sale</span>
                 </div>
                 <button aria-label="Save" className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full glass-dark text-white">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -447,17 +445,17 @@ function FeaturedVans() {
 
                 <div className="mt-5 flex items-end justify-between gap-3 border-t border-border/60 pt-4">
                   <div>
-                    <p className="text-xs text-muted-foreground">From</p>
-                    <p className="font-display font-extrabold text-2xl text-foreground">${v.rent}<span className="text-sm font-semibold text-muted-foreground">/day</span></p>
+                    <p className="text-xs text-muted-foreground">Price</p>
+                    <p className="font-display font-extrabold text-2xl text-foreground">${v.sale.toLocaleString()}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-muted-foreground">Or buy for</p>
-                    <p className="font-display font-bold text-lg text-[var(--forest)]">${v.sale.toLocaleString()}</p>
+                    <p className="text-xs text-muted-foreground">Finance from</p>
+                    <p className="font-display font-bold text-lg text-[var(--forest)]">${Math.round(v.sale / 60).toLocaleString()}<span className="text-xs font-medium text-muted-foreground">/mo</span></p>
                   </div>
                 </div>
-                <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground text-background font-semibold py-3 hover:opacity-90 transition">
+                <Link to="/buy" className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground text-background font-semibold py-3 hover:opacity-90 transition">
                   View details <ArrowRight className="h-4 w-4" />
-                </button>
+                </Link>
               </div>
             </article>
           ))}
