@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RentRouteImport } from './routes/rent'
 import { Route as ListYourVanRouteImport } from './routes/list-your-van'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as DestinationsRouteImport } from './routes/destinations'
@@ -19,11 +18,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 import { Route as VanSlugIdxRouteImport } from './routes/van.$slug.$idx'
 
-const RentRoute = RentRouteImport.update({
-  id: '/rent',
-  path: '/rent',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ListYourVanRoute = ListYourVanRouteImport.update({
   id: '/list-your-van',
   path: '/list-your-van',
@@ -72,7 +66,6 @@ export interface FileRoutesByFullPath {
   '/destinations': typeof DestinationsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/list-your-van': typeof ListYourVanRoute
-  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
   '/van/$slug/$idx': typeof VanSlugIdxRoute
 }
@@ -83,7 +76,6 @@ export interface FileRoutesByTo {
   '/destinations': typeof DestinationsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/list-your-van': typeof ListYourVanRoute
-  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
   '/van/$slug/$idx': typeof VanSlugIdxRoute
 }
@@ -95,7 +87,6 @@ export interface FileRoutesById {
   '/destinations': typeof DestinationsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/list-your-van': typeof ListYourVanRoute
-  '/rent': typeof RentRoute
   '/category/$slug': typeof CategorySlugRoute
   '/van/$slug/$idx': typeof VanSlugIdxRoute
 }
@@ -108,7 +99,6 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/how-it-works'
     | '/list-your-van'
-    | '/rent'
     | '/category/$slug'
     | '/van/$slug/$idx'
   fileRoutesByTo: FileRoutesByTo
@@ -119,7 +109,6 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/how-it-works'
     | '/list-your-van'
-    | '/rent'
     | '/category/$slug'
     | '/van/$slug/$idx'
   id:
@@ -130,7 +119,6 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/how-it-works'
     | '/list-your-van'
-    | '/rent'
     | '/category/$slug'
     | '/van/$slug/$idx'
   fileRoutesById: FileRoutesById
@@ -142,20 +130,12 @@ export interface RootRouteChildren {
   DestinationsRoute: typeof DestinationsRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ListYourVanRoute: typeof ListYourVanRoute
-  RentRoute: typeof RentRoute
   CategorySlugRoute: typeof CategorySlugRoute
   VanSlugIdxRoute: typeof VanSlugIdxRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/rent': {
-      id: '/rent'
-      path: '/rent'
-      fullPath: '/rent'
-      preLoaderRoute: typeof RentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/list-your-van': {
       id: '/list-your-van'
       path: '/list-your-van'
@@ -222,20 +202,9 @@ const rootRouteChildren: RootRouteChildren = {
   DestinationsRoute: DestinationsRoute,
   HowItWorksRoute: HowItWorksRoute,
   ListYourVanRoute: ListYourVanRoute,
-  RentRoute: RentRoute,
   CategorySlugRoute: CategorySlugRoute,
   VanSlugIdxRoute: VanSlugIdxRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
