@@ -549,9 +549,9 @@ function Stat({ k, v }: { k: string; v: string }) {
 
 function Testimonials() {
   const items = [
-    { q: "Picked up in Munich, dropped off in Lisbon. The booking was effortless and the van was immaculate.", a: "Marta · Solo traveler" },
-    { q: "We bought a family motorhome through CampVan. Financing was simple and the team handled every detail.", a: "The Petersons · Colorado" },
-    { q: "Listed my Sprinter and booked 22 nights in the first month. Best decision I've made.", a: "Liam · Van owner, UK" },
+    { q: "Bought our Sprinter through CampVan and had it delivered to our driveway in 10 days. Flawless process.", a: "Marta · Solo traveler" },
+    { q: "We purchased a family motorhome through CampVan. Financing was simple and the team handled every detail.", a: "The Petersons · Colorado" },
+    { q: "Sold my Sprinter in three weeks at the price I wanted. The team handled the inspection and paperwork.", a: "Liam · Van seller, UK" },
   ];
   return (
     <section className="py-24 sm:py-32">
