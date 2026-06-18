@@ -1,28 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/SiteChrome";
 import { Search, Calendar, MapPin, ShieldCheck, Sparkles, Star } from "lucide-react";
-import heroHow from "@/assets/hero-lux-1.jpg";
+import heroHow from "@/assets/van/van-new-1.jpg";
 
 const steps = [
-  { icon: Search, title: "1. Browse the marketplace", desc: "Filter by van type, location, year and budget. Every listing is inspected and verified." },
-  { icon: Calendar, title: "2. Reserve & finance", desc: "Place a refundable deposit, get financing pre-approval in 24 hours and lock in your price." },
-  { icon: MapPin, title: "3. Delivery & drive away", desc: "Doorstep delivery or concierge pickup. Keys in hand with a 12-month warranty." },
+  { icon: Search, title: "1. Parcourez la place de marché", desc: "Filtrez par type de van, emplacement, année et budget. Chaque annonce est inspectée et vérifiée." },
+  { icon: Calendar, title: "2. Réservez & financez", desc: "Placez un dépôt remboursable, obtenez une pré-approbation de financement en 24 heures et bloquez votre prix." },
+  { icon: MapPin, title: "3. Livraison & prenez la route", desc: "Livraison à domicile ou retrait concierge. Clés en main avec une garantie de 12 mois." },
 ];
 
 const faqs = [
-  { q: "Do I need a special license?", a: "For most vans, a standard driver's license is all you need. Larger Class A motorhomes may require additional endorsements depending on your country." },
-  { q: "Is the van inspected before I buy?", a: "Yes — every van sold through CampVan passes a 200-point inspection with verified service history and title check." },
-  { q: "Do you offer financing?", a: "Yes. We partner with leading lenders to offer pre-approval in under 24 hours, with terms up to 84 months." },
-  { q: "Is there a return guarantee?", a: "Every purchase includes a 7-day money-back guarantee and a 12-month mechanical warranty." },
+  { q: "Ai-je besoin d'un permis spécial?", a: "Pour la plupart des vans, un permis de conduire standard suffit. Les plus grands camping-cars de classe A peuvent nécessiter des endorsements supplémentaires selon votre pays." },
+  { q: "Le van est-il inspecté avant que je l'achète?", a: "Oui — chaque van vendu via CampVan passe une inspection en 200 points avec historique de service vérifié et vérification du titre." },
+  { q: "Proposez-vous du financement?", a: "Oui. Nous nous associons à des prêteurs leaders pour offrir une pré-approbation en moins de 24 heures, avec des durées allant jusqu'à 84 mois." },
+  { q: "Y a-t-il une garantie de retour?", a: "Chaque achat inclut une garantie satisfait ou remboursé de 7 jours et une garantie mécanique de 12 mois." },
 ];
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How it Works — CampVan" },
-      { name: "description", content: "Buying a camper van takes three simple steps. Here's how CampVan delivers an inspected, financed van to your door." },
-      { property: "og:title", content: "How it Works — CampVan" },
-      { property: "og:description", content: "Browse, reserve, drive away — with delivery, financing and warranty included." },
+      { title: "Comment ça marche — CampVan" },
+      { name: "description", content: "Acheter un camping-car se fait en trois étapes simples. Voici comment CampVan vous livre un van inspecté et financé à votre porte." },
+      { property: "og:title", content: "Comment ça marche — CampVan" },
+      { property: "og:description", content: "Parcourez, réservez, prenez la route — avec livraison, financement et garantie inclus." },
       { property: "og:image", content: heroHow },
     ],
   }),
@@ -33,9 +33,9 @@ function HowPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="How it works"
-        title="Three steps to the open road."
-        desc="No paperwork marathon. No surprises. Just a van and the next exit sign."
+        eyebrow="Comment ça marche"
+        title="Trois étapes vers la route ouverte."
+        desc="Pas de marathon de paperasse. Pas de surprises. Juste un van et la prochaine sortie."
         image={heroHow}
       />
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
@@ -54,9 +54,9 @@ function HowPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20">
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { icon: ShieldCheck, title: "Verified sellers", desc: "Every seller is identity-checked and their van inspected." },
-            { icon: Sparkles, title: "Premium marketplace", desc: "Hand-picked vans, full service history." },
-            { icon: Star, title: "4.9★ average", desc: "Trusted by buyers across two continents." },
+            { icon: ShieldCheck, title: "Vendeurs vérifiés", desc: "Chaque vendeur a son identité vérifiée et son van inspecté." },
+            { icon: Sparkles, title: "Place de marché premium", desc: "Vans sélectionnés à la main, historique de service complet." },
+            { icon: Star, title: "4.9★ moyenne", desc: "Fait confiance par les acheteurs sur deux continents." },
           ].map((p) => (
             <div key={p.title} className="rounded-3xl p-6 border border-foreground/10">
               <p.icon className="h-5 w-5 text-[var(--sunset)]" />
@@ -67,7 +67,7 @@ function HowPage() {
         </div>
       </section>
       <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-24">
-        <h2 className="font-display font-black text-3xl sm:text-4xl text-center">Frequently asked</h2>
+        <h2 className="font-display font-black text-3xl sm:text-4xl text-center">Foire aux questions</h2>
         <div className="mt-10 space-y-3">
           {faqs.map((f) => (
             <details key={f.q} className="glass rounded-2xl p-5 shadow-soft group">
@@ -81,7 +81,7 @@ function HowPage() {
         </div>
         <div className="mt-12 text-center">
           <Link to="/buy" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:opacity-90 transition">
-            Start exploring vans
+            Commencer à explorer les vans
           </Link>
         </div>
       </section>

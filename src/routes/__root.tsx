@@ -18,16 +18,16 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Page non trouvée</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          La page que vous recherchez n'existe pas ou a été déplacée.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Retour à l'accueil
           </Link>
         </div>
       </div>
@@ -46,10 +46,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Cette page n'a pas pu se charger
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Quelque chose a mal tourné de notre côté. Vous pouvez essayer de rafraîchir ou de retourner à l'accueil.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -59,13 +59,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Réessayer
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Retour à l'accueil
           </a>
         </div>
       </div>
@@ -78,15 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CampVan — Rent or Buy Camper Vans across USA & Europe" },
-      { name: "description", content: "Premium camper van, RV and motorhome rentals and sales across the USA and Europe." },
+      { title: "CampVan — Louer ou acheter un camping-car" },
+      { name: "description", content: "La place de marché premium pour acheter des camping-cars, vans aménagés et motorhomes à travers toute l'Europe." },
       { name: "author", content: "CampVan" },
-      { property: "og:title", content: "CampVan — Rent or Buy Camper Vans across USA & Europe" },
-      { property: "og:description", content: "Premium camper van, RV and motorhome rentals and sales across the USA and Europe." },
+      { property: "og:title", content: "CampVan — Louer ou acheter un camping-car" },
+      { property: "og:description", content: "La place de marché premium pour acheter des camping-cars, vans aménagés et motorhomes à travers toute l'Europe." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "CampVan — Rent or Buy Camper Vans across USA & Europe" },
-      { name: "twitter:description", content: "Premium camper van, RV and motorhome rentals and sales across the USA and Europe." },
+      { name: "twitter:title", content: "CampVan — Louer ou acheter un camping-car" },
+      { name: "twitter:description", content: "La place de marché premium pour acheter des camping-cars, vans aménagés et motorhomes à travers toute l'Europe." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/745c41bf-e791-48ed-9207-03fe5454229f/id-preview-90906541--43c4a09e-5674-4415-9be9-404966ca1a61.lovable.app-1781472097490.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/745c41bf-e791-48ed-9207-03fe5454229f/id-preview-90906541--43c4a09e-5674-4415-9be9-404966ca1a61.lovable.app-1781472097490.png" },
     ],
@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Outfit:wght400;500;600;700;800;90&family=Inter:wght400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>

@@ -4,10 +4,10 @@ import { useState, type ReactNode } from "react";
 import { useCart } from "@/lib/cart";
 
 const navLinks = [
-  { to: "/buy", label: "Shop Vans" },
+  { to: "/buy", label: "Acheter un camping-car" },
   { to: "/destinations", label: "Destinations" },
-  { to: "/how-it-works", label: "How it works" },
-  { to: "/list-your-van", label: "Sell your van" },
+  { to: "/how-it-works", label: "Comment ça marche" },
+  { to: "/list-your-van", label: "Vendre votre van" },
 ] as const;
 
 export function SiteNav() {
@@ -31,7 +31,7 @@ export function SiteNav() {
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-2">
-            <Link to="/cart" aria-label="Cart" className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-white/40 transition">
+            <Link to="/cart" aria-label="Panier" className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-white/40 transition">
               <ShoppingCart className="h-5 w-5" />
               {count > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 grid place-items-center rounded-full bg-[var(--sunset)] text-white text-[10px] font-bold">
@@ -39,11 +39,11 @@ export function SiteNav() {
                 </span>
               )}
             </Link>
-            <button className="px-4 py-2 text-sm font-semibold rounded-full hover:bg-white/40 transition">Sign in</button>
-            <button className="px-4 py-2 text-sm font-semibold rounded-full bg-foreground text-background hover:opacity-90 transition">Get started</button>
+            <button className="px-4 py-2 text-sm font-semibold rounded-full hover:bg-white/40 transition">Se connecter</button>
+            <button className="px-4 py-2 text-sm font-semibold rounded-full bg-foreground text-background hover:opacity-90 transition">Commencer</button>
           </div>
           <div className="md:hidden flex items-center gap-1">
-            <Link to="/cart" aria-label="Cart" className="relative grid h-9 w-9 place-items-center rounded-full bg-white/60">
+            <Link to="/cart" aria-label="Panier" className="relative grid h-9 w-9 place-items-center rounded-full bg-white/60">
               <ShoppingCart className="h-4 w-4" />
               {count > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 grid place-items-center rounded-full bg-[var(--sunset)] text-white text-[10px] font-bold">
@@ -61,7 +61,7 @@ export function SiteNav() {
             {navLinks.map((l) => (
               <Link key={l.to} to={l.to} onClick={() => setOpen(false)}>{l.label}</Link>
             ))}
-            <button className="mt-2 px-4 py-2 rounded-full bg-foreground text-background">Get started</button>
+            <button className="mt-2 px-4 py-2 rounded-full bg-foreground text-background">Commencer</button>
           </div>
         )}
       </div>
@@ -80,16 +80,16 @@ export function SiteFooter() {
             </span>
             CampVan
           </div>
-          <p className="mt-4 max-w-sm text-sm">The premium marketplace for buying camper vans, RVs, and motorhomes across the USA and Europe.</p>
+          <p className="mt-4 max-w-sm text-sm">La place de marché premium pour acheter des camping-cars, vans aménagés et motorhomes à travers toute l'Europe.</p>
         </div>
-        <FooterCol title="Shop" items={[{ to: "/buy", label: "Marketplace" }, { to: "/destinations", label: "Destinations" }]} />
-        <FooterCol title="Sellers" items={[{ to: "/list-your-van", label: "Sell your van" }, { to: "/how-it-works", label: "How it works" }]} />
-        <FooterCol title="Company" items={[{ to: "/", label: "Home" }]} />
+        <FooterCol title="Acheter" items={[{ to: "/buy", label: "Place de marché" }, { to: "/destinations", label: "Destinations" }]} />
+        <FooterCol title="Vendeurs" items={[{ to: "/list-your-van", label: "Vendre votre van" }, { to: "/how-it-works", label: "Comment ça marche" }]} />
+        <FooterCol title="Entreprise" items={[{ to: "/", label: "Accueil" }]} />
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
-          <p>© {new Date().getFullYear()} CampVan, Inc. All rights reserved.</p>
-          <div className="flex gap-5"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+          <p>© {new Date().getFullYear()} CampVan, Inc. Tous droits réservés.</p>
+          <div className="flex gap-5"><a href="#">Confidentialité</a><a href="#">Conditions</a><a href="#">Cookies</a></div>
         </div>
       </div>
     </footer>
@@ -121,7 +121,7 @@ export function PageHero({ eyebrow, title, desc, image }: { eyebrow: string; tit
   return (
     <section className="relative mx-auto max-w-7xl px-4 sm:px-6">
       <div className="relative overflow-hidden rounded-[2rem] shadow-soft">
-        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-transparent" />
         <div className="relative px-6 sm:px-12 py-16 sm:py-24 max-w-2xl text-white">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{eyebrow}</span>

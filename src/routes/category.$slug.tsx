@@ -12,21 +12,21 @@ export const Route = createFileRoute("/category/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — CampVan Rentals & Sales` },
+          { title: `${loaderData.name} — CampVan Locations & Ventes` },
           { name: "description", content: loaderData.description },
-          { property: "og:title", content: `${loaderData.name} on CampVan` },
+          { property: "og:title", content: `${loaderData.name} sur CampVan` },
           { property: "og:description", content: loaderData.description },
           { property: "og:image", content: loaderData.hero },
           { name: "twitter:image", content: loaderData.hero },
         ]
-      : [{ title: "Category — CampVan" }],
+      : [{ title: "Catégorie — CampVan" }],
   }),
   notFoundComponent: () => (
     <div className="min-h-screen grid place-items-center bg-background text-foreground p-6">
       <div className="text-center">
-        <h1 className="font-display font-black text-4xl">Category not found</h1>
+        <h1 className="font-display font-black text-4xl">Catégorie non trouvée</h1>
         <Link to="/" className="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-full bg-foreground text-background font-semibold">
-          <ArrowLeft className="h-4 w-4" /> Back to home
+          <ArrowLeft className="h-4 w-4" /> Retour à l'accueil
         </Link>
       </div>
     </div>
@@ -34,8 +34,8 @@ export const Route = createFileRoute("/category/$slug")({
   errorComponent: ({ reset }) => (
     <div className="min-h-screen grid place-items-center p-6">
       <div className="text-center">
-        <h1 className="font-display font-bold text-2xl">Something went wrong</h1>
-        <button onClick={reset} className="mt-4 px-5 py-2 rounded-full bg-foreground text-background">Try again</button>
+        <h1 className="font-display font-bold text-2xl">Quelque chose s'est mal passé</h1>
+        <button onClick={reset} className="mt-4 px-5 py-2 rounded-full bg-foreground text-background">Réessayer</button>
       </div>
     </div>
   ),
@@ -51,11 +51,11 @@ function CategoryPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
-        <img src={data.hero} alt={data.name} className="absolute inset-0 h-full w-full object-cover animate-kenburns" />
+        <img src={data.hero} alt={data.name} className="absolute inset-0 h-full w-full object-cover animate-kenburns" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 h-full flex flex-col justify-between pt-8 pb-12">
           <Link to="/" className="inline-flex items-center gap-2 self-start px-4 py-2 rounded-full glass-dark text-white text-sm font-semibold hover:bg-white/20 transition">
-            <ArrowLeft className="h-4 w-4" /> All categories
+            <ArrowLeft className="h-4 w-4" /> Toutes les catégories
           </Link>
           <div className="text-white max-w-3xl">
             <span className="inline-flex items-center gap-2 glass-dark text-white/90 text-[11px] font-semibold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
@@ -76,10 +76,10 @@ function CategoryPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <div>
-                <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[var(--forest)]">Step inside</span>
-                <h2 className="mt-2 font-display font-black text-3xl sm:text-4xl">A look at the interiors</h2>
+                <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[var(--forest)]">Entrez à l'intérieur</span>
+                <h2 className="mt-2 font-display font-black text-3xl sm:text-4xl">Un regard sur les intérieurs</h2>
               </div>
-              <p className="text-foreground/70 max-w-md">From walnut-trimmed lounges to spa-grade bathrooms — every detail is designed for the long way home.</p>
+              <p className="text-foreground/70 max-w-md">Des salons en noyer aux salles de bain de qualité spa — chaque détail est conçu pour la longue route.</p>
             </div>
             <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {data.interiors.map((i) => (
@@ -99,11 +99,11 @@ function CategoryPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[var(--forest)]">Available now</span>
-              <h2 className="mt-2 font-display font-black text-3xl sm:text-4xl">{data.vans.length} {data.name.toLowerCase()} ready to roam</h2>
+              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[var(--forest)]">Disponible maintenant</span>
+              <h2 className="mt-2 font-display font-black text-3xl sm:text-4xl">{data.vans.length} {data.name.toLowerCase()} prêt(e)s à partir</h2>
             </div>
             <div className="flex items-center gap-2 text-sm text-foreground/70">
-              <ShieldCheck className="h-4 w-4 text-[var(--forest)]" /> Free cancellation · 24/7 roadside
+              <ShieldCheck className="h-4 w-4 text-[var(--forest)]" /> Annulation gratuite · Assistance routière 24/7
             </div>
           </div>
 
@@ -139,24 +139,24 @@ function CategoryPage() {
                   </div>
                   <div className="mt-5 flex items-end justify-between border-t border-black/5 pt-4 gap-3">
                     <div>
-                      <div className="text-xs text-foreground/60">Price</div>
-                      <div className="font-display font-black text-xl">${v.sale.toLocaleString()}</div>
-                      <div className="text-[11px] text-foreground/60 mt-0.5">Financing from ${Math.round(v.sale / 60).toLocaleString()}/mo</div>
+                      <div className="text-xs text-foreground/60">Prix</div>
+                      <div className="font-display font-black text-xl">{v.sale.toLocaleString()} €</div>
+                      <div className="text-[11px] text-foreground/60 mt-0.5">Financement à partir de {Math.round(v.sale / 60).toLocaleString()} €/mois</div>
                     </div>
                     <div className="flex flex-col gap-2">
                       <button
                         onClick={() => add({ slug: data.slug, idx: i, name: v.name, img: v.img, location: v.location, price: v.sale, qty: 1 })}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground text-xs font-semibold transition"
-                        aria-label={`Add ${v.name} to cart`}
+                        aria-label={`Ajouter ${v.name} au panier`}
                       >
-                        <ShoppingCart className="h-3.5 w-3.5" /> Add
+                        <ShoppingCart className="h-3.5 w-3.5" /> Ajouter
                       </button>
                       <Link
                         to="/van/$slug/$idx"
                         params={{ slug: data.slug, idx: String(i) }}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition"
                       >
-                        View <ArrowRight className="h-3.5 w-3.5" />
+                        Voir <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -170,10 +170,10 @@ function CategoryPage() {
       {/* CTA */}
       <section className="py-20" style={{ background: "var(--gradient-warm)" }}>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center text-white">
-          <h2 className="font-display font-black text-3xl sm:text-5xl">Can't find your perfect ride?</h2>
-          <p className="mt-4 text-white/90 text-lg">Tell us your dates and dream destination — we'll match you with a hand-picked van.</p>
+          <h2 className="font-display font-black text-3xl sm:text-5xl">Vous ne trouvez pas votre véhicule idéal?</h2>
+          <p className="mt-4 text-white/90 text-lg">Dites-nous vos dates et destination de rêve — nous vous trouverons un van sélectionné à la main.</p>
           <Link to="/" className="inline-flex items-center gap-2 mt-8 px-7 py-3.5 rounded-full bg-white text-foreground font-semibold shadow-elevated hover:-translate-y-0.5 transition">
-            Browse all categories <ArrowRight className="h-4 w-4" />
+            Voir toutes les catégories <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
