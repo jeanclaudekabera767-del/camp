@@ -1,0 +1,7 @@
+name = "campcars"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+main = ".output/server/index.mjs"
+
+[site]
+bucket = ".output/public"
