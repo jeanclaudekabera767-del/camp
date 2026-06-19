@@ -107,61 +107,69 @@ function CategoryPage() {
             </div>
           </div>
 
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {data.vans.map((v: Van, i: number) => (
-              <article key={`${v.name}-${i}`} className="group rounded-3xl bg-white shadow-soft hover:shadow-elevated transition overflow-hidden border border-black/5">
-                <Link to="/van/$slug/$idx" params={{ slug: data.slug, idx: String(i) }} className="block relative aspect-[4/3] overflow-hidden">
-                  <img src={v.img} alt={v.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+              <Link
+                key={`${v.name}-${i}`}
+                to="/van/$slug/$idx"
+                params={{ slug: data.slug, idx: String(i) }}
+                className="group block bg-card rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-border/40 hover:-translate-y-2"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={v.img}
+                    alt={v.name}
+                    width={1024}
+                    height={768}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-115"
+                  />
                   {v.badge && (
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[var(--sunset)] text-white text-[11px] font-bold uppercase tracking-wider shadow-glow">
-                      {v.badge}
-                    </span>
+                    <div className="absolute top-3 left-3 flex gap-2 z-10">
+                      <span className="glass-dark text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-xl">
+                        {v.badge}
+                      </span>
+                    </div>
                   )}
-                  <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-xs font-bold">
-                    <Star className="h-3 w-3 fill-[var(--sunset)] text-[var(--sunset)]" /> {v.rating}
-                  </span>
-                </Link>
-                <div className="p-5">
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent h-3/4 pointer-events-none" />
+                </div>
+                <div className="p-4 sm:p-5 flex flex-col gap-3">
+                  <div>
+                    <h3 className="font-display font-bold text-sm sm:text-base line-clamp-2 leading-snug">
+                      {v.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1 mt-1.5">
+                      <MapPin className="h-3 w-3" /> {v.location}
+                    </p>
+                  </div>
+                  <ul className="grid grid-cols-3 gap-2 text-[11px] sm:text-xs">
+                    <li className="flex items-center gap-1.5 bg-muted/40 rounded-xl px-2.5 py-2 border border-border/20">
+                      <BedDouble className="h-3 w-3" />
+                      <span className="truncate text-foreground/80 font-medium">{v.beds} lits</span>
+                    </li>
+                    <li className="flex items-center gap-1.5 bg-muted/40 rounded-xl px-2.5 py-2 border border-border/20">
+                      <Users className="h-3 w-3" />
+                      <span className="truncate text-foreground/80 font-medium">{v.seats} places</span>
+                    </li>
+                    <li className="flex items-center gap-1.5 bg-muted/40 rounded-xl px-2.5 py-2 border border-border/20">
+                      <Fuel className="h-3 w-3" />
+                      <span className="truncate text-foreground/80 font-medium">{v.fuel}</span>
+                    </li>
+                  </ul>
+                  <div className="flex items-end justify-between gap-2 pt-3 border-t border-border/30">
                     <div>
-                      <Link to="/van/$slug/$idx" params={{ slug: data.slug, idx: String(i) }} className="hover:underline">
-                        <h3 className="font-display font-bold text-lg leading-tight">{v.name}</h3>
-                      </Link>
-                      <p className="mt-1 inline-flex items-center gap-1 text-xs text-foreground/60">
-                        <MapPin className="h-3 w-3" /> {v.location}
+                      <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">Prix TTC</p>
+                      <p className="font-display font-extrabold text-lg sm:text-xl" style={{ color: "var(--sunset)" }}>
+                        {v.sale.toLocaleString()} €
                       </p>
                     </div>
-                  </div>
-                  <div className="mt-4 flex items-center gap-4 text-xs text-foreground/70">
-                    <span className="inline-flex items-center gap-1"><BedDouble className="h-3.5 w-3.5" /> {v.beds}</span>
-                    <span className="inline-flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {v.seats}</span>
-                    <span className="inline-flex items-center gap-1"><Fuel className="h-3.5 w-3.5" /> {v.fuel}</span>
-                  </div>
-                  <div className="mt-5 flex items-end justify-between border-t border-black/5 pt-4 gap-3">
-                    <div>
-                      <div className="text-xs text-foreground/60">Prix</div>
-                      <div className="font-display font-black text-xl">{v.sale.toLocaleString()} €</div>
-                      <div className="text-[11px] text-foreground/60 mt-0.5">Financement à partir de {Math.round(v.sale / 60).toLocaleString()} €/mois</div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <button
-                        onClick={() => add({ slug: data.slug, idx: i, name: v.name, img: v.img, location: v.location, price: v.sale, qty: 1 })}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground text-xs font-semibold transition"
-                        aria-label={`Ajouter ${v.name} au panier`}
-                      >
-                        <ShoppingCart className="h-3.5 w-3.5" /> Ajouter
-                      </button>
-                      <Link
-                        to="/van/$slug/$idx"
-                        params={{ slug: data.slug, idx: String(i) }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition"
-                      >
-                        Voir <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
+                    <div className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-foreground">
+                      Voir détails
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

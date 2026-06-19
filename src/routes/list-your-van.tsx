@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/SiteChrome";
 import { useState } from "react";
-import heroList from "@/assets/van/van-new-2.jpg";
+import heroList from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-1.jpeg";
 
 export const Route = createFileRoute("/list-your-van")({
   head: () => ({

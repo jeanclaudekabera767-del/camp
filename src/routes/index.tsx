@@ -18,6 +18,16 @@ import {
   Menu,
 } from "lucide-react";
 import { categories } from "@/lib/categories";
+import adriaImg from "@/assets/Adria Sonic Supreme I 710S/adria-1.jpeg";
+import adriaSupersonicImg from "@/assets/ADRIA SUPERSONIC 780 DL – INTÉGRAL/adria-supersonic-780-1.jpeg";
+import benimarImg from "@/assets/ford-benimar/benimar-tessoro-444-1.jpeg";
+import buerstnerImg from "@/assets/Camping Car Bürstner Élégance i890g/buerstner-1.jpeg";
+import burstnerEleganceImg from "@/assets/Camping Car BURSTNER ELEGANCE I 800/burstner-elegance-800-1.jpeg";
+import carthagoImg from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-1.jpeg";
+import carthagoNewImg from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-2.jpeg";
+import fiatKnausSafariImg from "@/assets/FIAT KNAUS SKY 700 MOSKUS SAFARI/fiat-knaus-safari-2-1.jpeg";
+import fiatRapidoImg from "@/assets/FIAT 2.3 165 CH Rapido 7099+F/fiat-rapido-7099-1-1.jpeg";
+import xgoImg from "@/assets/XGO DYNAMIC 27 – CAPUCINE/xgo-dynamic-27-1.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,16 +42,27 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const featuredVans = [
-    ...categories["luxury-campers"].vans,
-    ...categories["camper-vans"].vans,
+  const featuredVans = categories["tous-les-camping-cars"].vans;
+  const heroVans = categories["tous-les-camping-cars"].vans;
+  
+  // Create hero items with image + corresponding van
+  const heroItems = [
+    { img: adriaImg, van: heroVans.find(v => v.name.includes("Adria Sonic")) || heroVans[0] },
+    { img: adriaSupersonicImg, van: heroVans.find(v => v.name.includes("ADRIA SUPERSONIC")) || heroVans[1] },
+    { img: benimarImg, van: heroVans.find(v => v.name.includes("BENIMAR")) || heroVans[2] },
+    { img: buerstnerImg, van: heroVans.find(v => v.name.includes("Bürstner")) || heroVans[3] },
+    { img: burstnerEleganceImg, van: heroVans.find(v => v.name.includes("BURSTNER")) || heroVans[4] },
+    { img: carthagoImg, van: heroVans.find(v => v.name.includes("CARTHAGO")) || heroVans[5] },
+    { img: carthagoNewImg, van: heroVans.find(v => v.name.includes("CARTHAGO")) || heroVans[6] },
+    { img: fiatKnausSafariImg, van: heroVans.find(v => v.name.includes("KNAUS")) || heroVans[7] },
+    { img: fiatRapidoImg, van: heroVans.find(v => v.name.includes("Rapido")) || heroVans[8] },
+    { img: xgoImg, van: heroVans.find(v => v.name.includes("XGO")) || heroVans[9] },
   ];
-
-  const heroVans = categories["luxury-campers"].vans;
+  
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <Hero heroVans={heroVans} />
+      <Hero heroItems={heroItems} />
       <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 -mt-6 sm:-mt-8">
         <SearchBar />
       </div>
@@ -102,30 +123,31 @@ function Nav() {
   );
 }
 
-function Hero({ heroVans }: { heroVans: any[] }) {
+function Hero({ heroItems }: { heroItems: { img: string; van: any }[] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % heroVans.length), 4200);
+    const id = setInterval(() => setIndex((i) => (i + 1) % heroItems.length), 4200);
     return () => clearInterval(id);
-  }, [paused, heroVans.length]);
+  }, [paused, heroItems.length]);
 
-  const go = (n: number) => setIndex((n + heroVans.length) % heroVans.length);
-  const active = heroVans[index];
+  const go = (n: number) => setIndex((n + heroItems.length) % heroItems.length);
+  const activeItem = heroItems[index];
+  const activeVan = activeItem.van;
 
   return (
     <section className="relative isolate min-h-[56vh] sm:min-h-[60vh] max-h-[680px] w-full overflow-hidden">
       <div
         className="absolute inset-0 flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.83,0,0.17,1)] will-change-transform"
-        style={{ width: `${heroVans.length * 100}%`, transform: `translateX(-${index * (100 / heroVans.length)}%)` }}
+        style={{ width: `${heroItems.length * 100}%`, transform: `translateX(-${index * (100 / heroItems.length)}%)` }}
       >
-        {heroVans.map((van, i) => (
-          <div key={van.name} className="relative h-full shrink-0" style={{ width: `${100 / heroVans.length}%` }}>
+        {heroItems.map((item, i) => (
+          <div key={i} className="relative h-full shrink-0" style={{ width: `${100 / heroItems.length}%` }}>
             <img
-              src={van.img}
-              alt={van.name}
+              src={item.img}
+              alt={item.van.name}
               loading={i === 0 ? "eager" : "lazy"}
               className="h-full w-full object-cover object-center"
             />
@@ -140,27 +162,26 @@ function Hero({ heroVans }: { heroVans: any[] }) {
           <div className="max-w-3xl text-white">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/28 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur-md">
               <Crown className="h-3.5 w-3.5 text-[var(--sunset)]" />
-              Flotte de Luxe
+              Camping-Car Premium
             </span>
             <h1 key={index} className="mt-4 font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-[1.02] animate-fade-up text-balance">
-              Explorez Sans
-              <span className="block gradient-text">Limites.</span>
+              {activeVan.name}
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/90">
-              Possédez des camping-cars premium, sélectionnés à la main, à travers toute l'Europe.
+              {activeVan.details?.substring(0, 120) || "Camping-car premium avec garantie 5 ans et livraison en Europe."}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/buy" className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
-                Parcourir le marché <ArrowRight className="h-4 w-4" />
+              <Link to={`/van/tous-les-camping-cars/${categories["tous-les-camping-cars"].vans.indexOf(activeVan)}`} className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-white font-semibold shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
+                Voir les détails <ArrowRight className="h-4 w-4" />
               </Link>
               <a href="#categories" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-6 py-3.5 text-white font-semibold backdrop-blur-md transition hover:bg-white/20">
-                Parcourir par style
+                Parcourir le catalogue
               </a>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/90">
-              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Camping-cars premium vérifiés</span>
-              <span className="inline-flex items-center gap-2"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> Plus de 120 villes de retrait</span>
-              <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-[var(--sunset)]" /> Note de 4.9</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Garantie 5 ans</span>
+              <span className="inline-flex items-center gap-2"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> Livraison Europe</span>
+              <span className="inline-flex items-center gap-2"><Star className="h-4 w-4 text-[var(--sunset)]" /> Note {activeVan.rating}</span>
             </div>
           </div>
         </div>
@@ -175,48 +196,25 @@ function Hero({ heroVans }: { heroVans: any[] }) {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--sunset)]/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-                <Sparkles className="h-3 w-3" /> {active.badge || "Premium"}
+                <Sparkles className="h-3 w-3" /> {activeVan.badge || "Nouveau"}
               </span>
               <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/90">
                 <Star className="h-4 w-4 fill-[var(--sunset)]" />
-                {active.rating}
+                {activeVan.rating}
               </span>
             </div>
             <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
               <div className="min-w-0">
-                <p className="truncate font-display text-lg font-bold sm:text-xl">{active.name}</p>
-                <p className="truncate text-sm text-white/72">{active.location} • {active.beds} lits • {active.seats} places</p>
+                <p className="truncate font-display text-lg font-bold sm:text-xl">{activeVan.name}</p>
+                <p className="truncate text-sm text-white/72">{activeVan.location} • {activeVan.beds} lits • {activeVan.seats} places</p>
               </div>
               <div className="flex items-end gap-5 text-sm">
                 <div className="text-right">
-                  <p className="text-[10px] uppercase tracking-widest text-white/60">Posséder pour</p>
-                  <p className="font-display text-2xl font-extrabold text-[var(--sunset)]">{active.sale.toLocaleString()} €</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/60">Prix</p>
+                  <p className="font-display text-2xl font-extrabold text-[var(--sunset)]">{activeVan.sale.toLocaleString()} €</p>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2">
-            <div className="hidden md:flex items-center gap-2 pr-2">
-              {heroVans.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Aller à la diapositive ${i + 1}`}
-                  onClick={() => go(i)}
-                  className="h-1.5 rounded-full transition-all"
-                  style={{
-                    width: i === index ? 30 : 12,
-                    background: i === index ? "var(--sunset)" : "rgba(255,255,255,0.42)",
-                  }}
-                />
-              ))}
-            </div>
-            <button onClick={() => go(index - 1)} aria-label="Précédent" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20">
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-            <button onClick={() => go(index + 1)} aria-label="Suivant" className="grid h-10 w-10 place-items-center rounded-full text-white shadow-glow transition hover:-translate-y-0.5" style={{ background: "var(--gradient-warm)" }}>
-              <ArrowRight className="h-4 w-4" />
-            </button>
           </div>
         </div>
       </div>
@@ -241,8 +239,8 @@ function SearchBar() {
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/70">
         <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--sunset)]" /> Protection acheteur</span>
-        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> Inspection en 200 points</span>
-        <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> 7 pays • Plus de 120 villes</span>
+        <span className="inline-flex items-center gap-1.5"><Star className="h-4 w-4 text-[var(--sunset)]" /> Garantie 5 ans</span>
+        <span className="inline-flex items-center gap-1.5"><Globe2 className="h-4 w-4 text-[var(--sunset)]" /> Livraison Europe</span>
       </div>
     </div>
   );
@@ -267,20 +265,32 @@ function CategoriesSection() {
     <section id="categories" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHead
-          eyebrow="Parcourir par style"
-          title="Trouvez votre type d'aventure"
-          desc="Des véhicules tout-terrain robustes aux camping-cars familiaux — votre véhicule parfait vous attend."
+          eyebrow="Notre catalogue"
+          title="Tous nos camping-cars"
+          desc="Camping-cars premium, neufs et d'occasion, sélectionnés à la main."
         />
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {Object.values(categories).map((cat) => (
-            <Link key={cat.slug} to={`/category/${cat.slug}`} className="group relative aspect-[4/3] sm:aspect-[5/4] overflow-hidden rounded-3xl shadow-soft hover:shadow-elevated transition">
-              <img src={cat.hero} alt={cat.name} width={1024} height={768} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                <h3 className="font-display font-bold text-xl sm:text-2xl">{cat.name}</h3>
-                <p className="text-sm text-white/80 mt-1">{cat.count}</p>
-                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:gap-2 transition-all">
-                  Voir plus <ArrowRight className="h-3.5 w-3.5" />
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {Object.values(categories).map((cat: any) => (
+            <Link
+              key={cat.slug}
+              to={`/category/${cat.slug}`}
+              className="group relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-3xl shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-1"
+            >
+              <img
+                src={cat.hero}
+                alt={cat.name}
+                width={1920}
+                height={1080}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 text-white">
+                <h3 className="font-display font-bold text-2xl sm:text-3xl">{cat.name}</h3>
+                <p className="text-sm text-white/80 mt-2">{cat.count}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 group-hover:gap-2 transition-all">
+                  Voir les camping-cars
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </div>
             </Link>
@@ -297,57 +307,16 @@ function FeaturedVans({ featuredVans }: { featuredVans: any[] }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead
-            eyebrow="À la une cette semaine"
-            title="Camping-cars sélectionnés à la main"
-            desc="Inspectés, financés et livrés — votre prochain camping-car est à un clic."
+            eyebrow="À la une"
+            title="Camping-car disponible"
+            desc="Inspecté, financé et livré — votre prochain camping-car est à un clic."
             align="left"
           />
-          <Link to="/buy" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold">
-            Voir toutes les annonces <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
 
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredVans.slice(0, 6).map((van, i) => (
-            <article key={i} className="group bg-card rounded-3xl overflow-hidden shadow-soft hover:shadow-elevated transition border border-border/60">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={van.img} alt={van.name} width={1024} height={768} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                {van.badge && (
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    <span className="glass-dark text-white text-xs font-semibold px-2.5 py-1 rounded-full">{van.badge}</span>
-                  </div>
-                )}
-              </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <h3 className="font-display font-bold text-lg truncate">{van.name}</h3>
-                    <p className="text-sm text-muted-foreground flex items-center gap-1 mt-0.5"><MapPin className="h-3.5 w-3.5" /> {van.location}</p>
-                  </div>
-                  <span className="shrink-0 inline-flex items-center gap-1 text-sm font-semibold px-2 py-1 rounded-full" style={{ background: "color-mix(in oklab, var(--sunset) 18%, transparent)", color: "var(--forest-deep)" }}>
-                    <Star className="h-3.5 w-3.5 fill-[var(--sunset)]" />
-                    {van.rating}
-                  </span>
-                </div>
-
-                <ul className="mt-4 grid grid-cols-3 gap-2 text-xs text-foreground/70">
-                  <Spec icon={<BedDouble className="h-3.5 w-3.5" />}>{van.beds} lits</Spec>
-                  <Spec icon={<Users className="h-3.5 w-3.5" />}>{van.seats} places</Spec>
-                  <Spec icon={<Fuel className="h-3.5 w-3.5" />}>{van.fuel}</Spec>
-                </ul>
-
-                <div className="mt-5 flex items-end justify-between gap-3 border-t border-border/60 pt-4">
-                  <div>
-                    <p className="text-xs text-muted-foreground">Prix</p>
-                    <p className="font-display font-extrabold text-2xl text-foreground">{van.sale.toLocaleString()} €</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">Location à partir de</p>
-                    <p className="font-display font-bold text-lg text-[var(--forest)]">{van.rent} €<span className="text-xs font-medium text-muted-foreground">/jour</span></p>
-                  </div>
-                </div>
-              </div>
-            </article>
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {featuredVans.map((van, i) => (
+            <VanCard key={i} van={van} index={i} />
           ))}
         </div>
       </div>
@@ -355,10 +324,70 @@ function FeaturedVans({ featuredVans }: { featuredVans: any[] }) {
   );
 }
 
+function VanCard({ van, index }: { van: any; index: number }) {
+  return (
+    <Link
+      key={index}
+      to={`/van/tous-les-camping-cars/${index}`}
+      className="group block bg-card rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-border/40 hover:-translate-y-2"
+    >
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img
+          src={van.img}
+          alt={van.name}
+          width={1024}
+          height={768}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-115"
+        />
+        {van.badge && (
+          <div className="absolute top-3 left-3 flex gap-2 z-10">
+            <span className="glass-dark text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-xl">
+              {van.badge}
+            </span>
+          </div>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent h-3/4 pointer-events-none" />
+      </div>
+
+      <div className="p-4 sm:p-5 flex flex-col gap-3">
+        <div>
+          <h3 className="font-display font-bold text-sm sm:text-base line-clamp-2 leading-snug">
+            {van.name}
+          </h3>
+          <p className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1 mt-1.5">
+            <MapPin className="h-3 w-3" /> {van.location}
+          </p>
+        </div>
+
+        <ul className="grid grid-cols-3 gap-2 text-[11px] sm:text-xs">
+          <Spec icon={<BedDouble className="h-3 w-3" />}>{van.beds} lits</Spec>
+          <Spec icon={<Users className="h-3 w-3" />}>{van.seats} places</Spec>
+          <Spec icon={<Fuel className="h-3 w-3" />}>{van.fuel}</Spec>
+        </ul>
+
+        <div className="flex items-end justify-between gap-2 pt-3 border-t border-border/30">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">Prix TTC</p>
+            <p className="font-display font-extrabold text-lg sm:text-xl" style={{ color: "var(--sunset)" }}>
+              {van.sale.toLocaleString()} €
+            </p>
+          </div>
+          <div className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-foreground">
+            Voir détails
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function Spec({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <li className="flex items-center gap-1.5 bg-muted/70 rounded-lg px-2 py-1.5">
-      {icon} <span className="truncate">{children}</span>
+    <li className="flex items-center gap-1.5 bg-muted/40 rounded-xl px-2.5 py-2 border border-border/20">
+      {icon}
+      <span className="truncate text-foreground/80 font-medium">{children}</span>
     </li>
   );
 }
@@ -402,10 +431,10 @@ function Destinations() {
             <p className="mt-4 text-white/75 text-lg">Hubs de livraison conciergerie à travers toute l'Europe, avec livraison porte à porte dans la plupart des grandes villes.</p>
           </div>
           <div className="glass-dark rounded-3xl p-4 grid grid-cols-2 gap-2">
-            <Stat k="3 500+" v="Véhicules" />
-            <Stat k="120+" v="Villes" />
+            <Stat k="1" v="Camping-car" />
             <Stat k="7" v="Pays" />
-            <Stat k="4.9★" v="Note" />
+            <Stat k="5" v="Ans garantie" />
+            <Stat k="5.0★" v="Note" />
           </div>
         </div>
 
@@ -434,9 +463,24 @@ function Stat({ k, v }: { k: string; v: string }) {
 
 function Testimonials() {
   const items = [
-    { q: "Nous avons acheté notre camping-car via CampVan et il a été livré à notre porte en 10 jours. Processus impeccable.", a: "Marta • Voyageur solo" },
-    { q: "Nous avons acheté un camping-car familial via CampVan. Le financement était simple et l'équipe a géré tous les détails.", a: "Les Dubois • France" },
-    { q: "J'ai vendu mon Sprinter en trois semaines au prix que je voulais. L'équipe a géré l'inspection et la paperasse.", a: "Thomas • Vendeur" },
+    { 
+      q: "Nous avons acheté notre camping-car via CampVan et il a été livré à notre porte en 10 jours. Processus impeccable et équipe très réactive.", 
+      a: "Marta Dubois", 
+      loc: "Paris, France",
+      van: "Adria Sonic Supreme" 
+    },
+    { 
+      q: "Le financement était simple et l'équipe a géré tous les détails. Notre famille adore notre nouveau camping-car !", 
+      a: "Paul et Sophie Martin", 
+      loc: "Lyon, France",
+      van: "Challenger S194 Sport" 
+    },
+    { 
+      q: "J'ai vendu mon Sprinter en trois semaines au prix que je voulais. L'équipe a géré l'inspection et toute la paperasse.", 
+      a: "Thomas Leroy", 
+      loc: "Marseille, France",
+      van: "Vendeur vérifié" 
+    },
   ];
   return (
     <section className="py-24 sm:py-32">
@@ -448,8 +492,18 @@ function Testimonials() {
               <div className="flex gap-0.5 text-[var(--sunset)]">
                 {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
               </div>
-              <blockquote className="mt-4 text-lg font-medium leading-relaxed">« {t.q} »</blockquote>
-              <figcaption className="mt-6 text-sm text-muted-foreground">{t.a}</figcaption>
+              <blockquote className="mt-4 text-lg font-medium leading-relaxed text-foreground">« {t.q} »</blockquote>
+              <figcaption className="mt-6 pt-4 border-t border-border/40">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-full text-white" style={{ background: "var(--gradient-warm)" }}>
+                    {t.a.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">{t.a}</p>
+                    <p className="text-xs text-muted-foreground">{t.loc} • {t.van}</p>
+                  </div>
+                </div>
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -480,14 +534,14 @@ function CTA() {
               </div>
             </div>
             <div className="glass rounded-3xl p-6 text-foreground">
-              <p className="text-sm text-foreground/70">Prix de vente moyen</p>
-              <p className="font-display font-extrabold text-5xl mt-1">54 900 €</p>
+              <p className="text-sm text-foreground/70">Prix de vente</p>
+              <p className="font-display font-extrabold text-5xl mt-1">75 000 €</p>
               <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-                <Mini k="21 jours" v="pour vendre" />
-                <Mini k="4.9★" v="note vendeur" />
+                <Mini k="5 ans" v="garantie" />
+                <Mini k="5.0★" v="note" />
                 <Mini k="0%" v="frais de liste" />
               </div>
-              <p className="text-xs text-foreground/60 mt-4">Basé sur les camping-cars vendus via CampVan au cours des 12 derniers mois.</p>
+              <p className="text-xs text-foreground/60 mt-4">Basé sur le camping-car disponible.</p>
             </div>
           </div>
         </div>
@@ -508,7 +562,7 @@ function Mini({ k, v }: { k: string; v: string }) {
 function Footer() {
   return (
     <footer className="text-white/80" style={{ background: "var(--forest-deep)" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 grid gap-10 md:grid-cols-5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 grid gap-10 md:grid-cols-6">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-display font-extrabold text-xl text-white">
             <span className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "var(--gradient-warm)" }}>
@@ -521,15 +575,17 @@ function Footer() {
             CampVan
           </div>
           <p className="mt-4 max-w-sm text-sm">La place de marché premium pour acheter des camping-cars, vans aménagés et motorhomes à travers toute l'Europe.</p>
+          <p className="mt-4 text-xs text-white/50">CampVan, SAS • 123 Rue de la République • 75001 Paris • France</p>
         </div>
         <FooterCol title="Acheter" links={["Camping-Cars", "Motorhomes", "Luxe", "Familiaux"]} />
         <FooterCol title="Services" links={["Financement", "Inspections", "Livraison", "Garantie"]} />
         <FooterCol title="Entreprise" links={["À propos", "Blog", "Carrières", "Presse", "Contact"]} />
+        <FooterCol title="Légal" links={["Conditions générales", "Politique de confidentialité", "Gestion des cookies", "Mentions légales", "Droit de rétractation"]} />
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
-          <p>© {new Date().getFullYear()} CampVan, Inc. Tous droits réservés.</p>
-          <div className="flex gap-5"><a href="#">Confidentialité</a><a href="#">Conditions</a><a href="#">Cookies</a></div>
+          <p>© {new Date().getFullYear()} CampVan, SAS. Tous droits réservés.</p>
+          <div className="flex gap-5"><a href="#" className="hover:text-white transition">Confidentialité</a><a href="#" className="hover:text-white transition">CGV</a><a href="#" className="hover:text-white transition">Cookies</a><a href="#" className="hover:text-white transition">Mentions légales</a></div>
         </div>
       </div>
     </footer>

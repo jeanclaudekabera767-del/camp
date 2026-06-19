@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/SiteChrome";
 import { ArrowRight } from "lucide-react";
-import heroDest from "@/assets/van/van-new-1.jpg";
-import lux1 from "@/assets/van/van-new-2.jpg";
-import lux2 from "@/assets/van/van-new-3.jpg";
-import lux3 from "@/assets/van/van-new-4.jpg";
-import van1 from "@/assets/van/van-new-5.jpg";
-import van2 from "@/assets/van/van-new-6.jpg";
+import heroDest from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-1.jpeg";
+import lux1 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-2.jpeg";
+import lux2 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-3.jpeg";
+import lux3 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-4.jpeg";
+import van1 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-5.jpeg";
+import van2 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-6.jpeg";
 
 const places = [
   { img: lux1, country: "États-Unis", region: "Pacific Coast Highway", vans: "320+ vans" },

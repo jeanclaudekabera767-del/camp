@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Check } from "lucide-react";
+import { ArrowLeft, BedDouble, Users, Fuel, Star, MapPin, ShieldCheck, ShoppingCart, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { getVan, type Van } from "@/lib/categories";
 import { useCart } from "@/lib/cart";
@@ -45,6 +45,7 @@ function VanPage() {
   const { add } = useCart();
   const navigate = useNavigate();
   const [added, setAdded] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
 
   const related: Van[] = category.vans.filter((_v: Van, i: number) => i !== idx).slice(0, 3);
   const monthly = Math.round(van.sale / 60);
@@ -64,26 +65,76 @@ function VanPage() {
     if (go) navigate({ to: "/cart" });
   }
 
+  const nextImage = () => {
+    setActiveImage((i) => (i + 1) % van.images.length);
+  };
+
+  const prevImage = () => {
+    setActiveImage((i) => (i - 1 + van.images.length) % van.images.length);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="pt-28 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Link
-            to="/category/$slug"
-            params={{ slug: category.slug }}
+            to="/"
             className="inline-flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground"
           >
-            <ArrowLeft className="h-4 w-4" /> Retour à {category.name}
+            <ArrowLeft className="h-4 w-4" /> Retour à l'accueil
           </Link>
 
           <div className="mt-6 grid lg:grid-cols-[1.4fr_1fr] gap-8">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft">
-              <img src={van.img} alt={van.name} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-              {van.badge && (
-                <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--sunset)] text-white text-[11px] font-bold uppercase tracking-wider shadow-glow">
-                  {van.badge}
-                </span>
+            <div className="space-y-4">
+              {/* Main Image */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft group">
+                <img
+                  src={van.images[activeImage]}
+                  alt={`${van.name} - ${activeImage + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                {van.badge && (
+                  <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--sunset)] text-white text-[11px] font-bold uppercase tracking-wider shadow-glow">
+                    {van.badge}
+                  </span>
+                )}
+
+                {/* Navigation Arrows */}
+                {van.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition flex items-center justify-center hover:bg-black/70"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition flex items-center justify-center hover:bg-black/70"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnail Grid */}
+              {van.images.length > 1 && (
+                <div className="grid grid-cols-5 gap-3">
+                  {van.images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImage(i)}
+                      className={`relative aspect-square overflow-hidden rounded-xl transition ${
+                        activeImage === i ? 'ring-2 ring-[var(--sunset)]' : 'opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={img} alt={`${van.name} thumbnail ${i + 1}`} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
               )}
             </div>
 
@@ -111,7 +162,7 @@ function VanPage() {
                 <p className="mt-2 text-sm text-foreground/70">
                   Ou financez à partir de <span className="font-semibold text-foreground">{monthly.toLocaleString()} €/mois</span> sur 60 mois.
                 </p>
-                <p className="mt-3 text-sm text-foreground/70">Inclut une garantie mécanique de 12 mois, une inspection en 200 points et une livraison gratuite dans un rayon de 300 km.</p>
+                <p className="mt-3 text-sm text-foreground/70">{van.details}</p>
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   <button
@@ -134,14 +185,6 @@ function VanPage() {
               </div>
             </div>
           </div>
-
-          <section className="mt-16">
-            <h2 className="font-display font-black text-2xl">À propos de ce {category.name.slice(0, -1).toLowerCase()}</h2>
-            <p className="mt-4 max-w-3xl text-foreground/75 leading-relaxed">
-              {van.name} est situé à {van.location} et prêt à être remis. Chaque van vendu via CampVan est accompagné d'une
-              inspection complète en 200 points, d'un historique de service vérifié, d'une vérification du titre et d'une garantie mécanique de 12 mois. {category.description}
-            </p>
-          </section>
 
           {related.length > 0 && (
             <section className="mt-16">

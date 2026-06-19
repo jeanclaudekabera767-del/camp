@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/SiteChrome";
 import { ShieldCheck, Gauge, MapPin, ArrowRight, Sparkles } from "lucide-react";
-import heroBuy from "@/assets/van/van-new-1.jpg";
-import van1 from "@/assets/van/van-new-2.jpg";
-import van2 from "@/assets/van/van-new-3.jpg";
-import van3 from "@/assets/van/van-new-4.jpg";
-import lux1 from "@/assets/van/van-new-5.jpg";
-import lux2 from "@/assets/van/van-new-6.jpg";
-import lux4 from "@/assets/van/van-new-7.jpg";
+import heroBuy from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-1.jpeg";
+import van1 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-2.jpeg";
+import van2 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-3.jpeg";
+import van3 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-4.jpeg";
+import lux1 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-5.jpeg";
+import lux2 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-6.jpeg";
+import lux4 from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-7.jpeg";
 
 const market = [
   { img: lux1, name: "Sprinter Edition Noir", loc: "Malibu, CA", price: 68500, year: 2024, km: "13 200" },

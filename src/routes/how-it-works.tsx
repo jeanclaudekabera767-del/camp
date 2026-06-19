@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/SiteChrome";
 import { Search, Calendar, MapPin, ShieldCheck, Sparkles, Star } from "lucide-react";
-import heroHow from "@/assets/van/van-new-1.jpg";
+import heroHow from "@/assets/CARTHAGO  Fiat Ducato 2.2 de 180/carthago-new-2.jpeg";
 
 const steps = [
   { icon: Search, title: "1. Parcourez la place de marché", desc: "Filtrez par type de van, emplacement, année et budget. Chaque annonce est inspectée et vérifiée." },
